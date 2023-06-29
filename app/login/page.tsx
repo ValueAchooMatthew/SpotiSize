@@ -1,9 +1,8 @@
 'use client'
-import Image from 'next/image'
 import styles from './page.module.css'
 import { useSearchParams } from 'next/navigation'
 
-export default function Home() {
+export default function Login() {
   const searchParams = useSearchParams()
 
   const code = searchParams.get('code')
