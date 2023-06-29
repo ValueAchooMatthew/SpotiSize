@@ -1,10 +1,11 @@
-import Image from 'next/image'
+import Link from 'next/link'
 import styles from './page.module.css'
 
 export default function Home() {
   return (
     <main>
-      <button>Log in</button>
+      <p>Hello</p>
+      <Link href="/login">To login page</Link>
     </main>
   )
 }
