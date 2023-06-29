@@ -11,7 +11,7 @@ async function getArtists(accessToken: String) {
     });
   
     const data: SpotifyApi.UsersTopArtistsResponse | SpotifyError = await response.json();
-
+    // await new Promise(r => setTimeout(r, 2000)) //Simulate throttle to test loading animation
     return data
   }
 
