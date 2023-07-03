@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type SpotifyError = {error: SpotifyApi.ErrorObject}
@@ -17,7 +18,6 @@ async function getArtists(accessToken: String) {
 
 export default async function Songs() {
     let authToken = "something"; // Assume we have lol
-
     
     let artistsResponse = await getArtists(authToken)
     let error = artistsResponse as SpotifyError;
