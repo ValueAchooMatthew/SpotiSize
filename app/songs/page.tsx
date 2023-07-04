@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
 
 type SpotifyError = {error: SpotifyApi.ErrorObject}
 
@@ -17,21 +16,25 @@ async function getArtists(accessToken: String) {
   }
 
 export default async function Songs() {
-    let authToken = "something"; // Assume we have lol
-    
-    let artistsResponse = await getArtists(authToken)
-    let error = artistsResponse as SpotifyError;
-    let success = artistsResponse as SpotifyApi.UsersTopArtistsResponse
-    if (error) {
-        return(<p>
-            Error: {error.error.message} <br />
-            Status: {error.error.status}
-        </p>)
-    } else {
-    return(<ul>
-        {success?.items.map((artist) => {
-            return <li key={artist.id}> Name: {artist.name} </li>
-        })}
-    </ul>)}
+    const session = await getSession();
+    let authToken = session?.user.accessToken;
+    return(<p>
+      Token: {authToken}
+  </p>)
+    // let artistsResponse = await getArtists(authToken)
+    // let error = artistsResponse as SpotifyError;
+    // let success = artistsResponse as SpotifyApi.UsersTopArtistsResponse
+    // if (error) {
+    //     return(<p>
+    //         Error: {error.error.message} <br />
+    //         Status: {error.error.status} <br />
+    //         Token: {authToken}
+    //     </p>)
+    // } else {
+    // return(<ul>
+    //     {success?.items.map((artist) => {
+    //         return <li key={artist.id}> Name: {artist.name} </li>
+    //     })}
+    // </ul>)}
     
 }
