@@ -24,7 +24,7 @@ async function refreshToken(token: JWT): Promise<JWT> {
     api.setRefreshToken(token.refreshToken);
 
     const { body: refreshedToken } = await api.refreshAccessToken();
-    console.log("Refreshed " + refreshedToken.access_token);
+
     return {
       ...token,
       accessToken: refreshedToken.access_token,
@@ -65,7 +65,7 @@ const authOptions: NextAuthOptions = {
         if (account.expires_at) {
           expires_at = account.expires_at * 1000;
         }
-        console.log("New sign on" + account.access_token);
+
         return {
           ...token,
           accessToken: account.access_token,
@@ -77,7 +77,6 @@ const authOptions: NextAuthOptions = {
         // Not initial sign
         token.accessTokenExpires && Date.now() < token.accessTokenExpires
       ) {
-        console.log("Not new sign on" + token.accessToken);
         return token;
       } else {
         return await refreshToken(token);
