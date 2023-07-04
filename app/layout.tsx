@@ -1,4 +1,3 @@
-import { SessionProvider } from 'next-auth/react'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -16,9 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <SessionProvider>
         <body className={inter.className}>{children}</body>
-      </SessionProvider>
     </html>
   )
 }
