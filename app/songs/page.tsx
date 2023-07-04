@@ -1,40 +1,41 @@
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import SpotifyWebApi from "spotify-web-api-node";
 
-type SpotifyError = {error: SpotifyApi.ErrorObject}
+
+type SpotifyError = { error: SpotifyApi.ErrorObject }
 
 async function getArtists(accessToken: String) {
-  
-    const response = await fetch('https://api.spotify.com/v1/me/top/artists', {
-      headers: {
-        Authorization: 'Bearer ' + accessToken
-      }
-    });
-  
-    const data: SpotifyApi.UsersTopArtistsResponse | SpotifyError = await response.json();
-    // await new Promise(r => setTimeout(r, 2000)) //Simulate throttle to test loading animation
-    return data
-  }
+
+  const response = await fetch('https://api.spotify.com/v1/me/top/artists', {
+    headers: {
+      Authorization: 'Bearer ' + accessToken
+    }
+  });
+
+  const data: SpotifyApi.UsersTopArtistsResponse | SpotifyError = await response.json();
+  // await new Promise(r => setTimeout(r, 2000)) //Simulate throttle to test loading animation
+  return data
+}
 
 export default async function Songs() {
-    const session = await getSession();
-    let authToken = session?.user.accessToken;
-    return(<p>
-      Token: {authToken}
-  </p>)
-    // let artistsResponse = await getArtists(authToken)
-    // let error = artistsResponse as SpotifyError;
-    // let success = artistsResponse as SpotifyApi.UsersTopArtistsResponse
-    // if (error) {
-    //     return(<p>
-    //         Error: {error.error.message} <br />
-    //         Status: {error.error.status} <br />
-    //         Token: {authToken}
-    //     </p>)
-    // } else {
-    // return(<ul>
-    //     {success?.items.map((artist) => {
-    //         return <li key={artist.id}> Name: {artist.name} </li>
-    //     })}
-    // </ul>)}
-    
+
+  const session = await getServerSession(authOptions)
+  let accessToken = session?.user.accessToken;
+  if (accessToken) {
+    let api = new SpotifyWebApi();
+    api.setAccessToken(accessToken);
+    let top_tracks = await api.getMyTopArtists();
+
+    return (<ul>
+      {top_tracks.body.items.map((artist) => {
+        return <li key={artist.id}> Name: {artist.name} </li>
+      })}
+    </ul>)
+
+  } else {
+    return (<p>
+      Brick
+    </p>)
+  }
 }
