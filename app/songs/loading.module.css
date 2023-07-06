@@ -1,0 +1,32 @@
+.loading {
+    align-items: center;
+    text-overflow: hidden;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 7ch;
+    font-family: var(--font-mono);
+    animation: dots 1s infinite;
+    animation-timing-function: step-end;
+}
+
+@keyframes dots {
+    0% {
+        width: 7ch;
+    }
+
+    25% {
+        width: 8ch;
+    }
+
+    50% {
+        width: 9ch;
+    }
+
+    75% {
+        width: 10ch;
+    }
+
+    100% {
+        width: 7ch;
+    }
+}
