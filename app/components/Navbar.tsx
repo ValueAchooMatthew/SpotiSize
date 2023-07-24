@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full h-16 bg-transparent">
-      {/* Replace with Logo and "Spotisize" */}
+      {/* Replace with Logo and "Spotisize" that we can design */}
       <div className="flex justify-between items-center h-full w-full px-5 2xl:px-16">
         <Link href="/">
           <Image
