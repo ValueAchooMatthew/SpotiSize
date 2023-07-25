@@ -23,6 +23,7 @@ export default function Navbar() {
             priority
           />
         </Link>
+
         <div>
           <ul className="hidden md:flex pr-8">
             <Link href="/">
