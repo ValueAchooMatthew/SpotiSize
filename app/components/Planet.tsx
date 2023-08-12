@@ -6,9 +6,6 @@ type Props = {
   name: string;
   artistInfo: SpotifyApi.ArtistObjectFull;
 };
-const imageStyle: CSSProperties = {
-  borderRadius: "9999px",
-};
 
 export default function Planet({ name, artistInfo }: Props) {
   return (
@@ -21,7 +18,7 @@ export default function Planet({ name, artistInfo }: Props) {
         src={artistInfo.images[0].url}
         alt={name}
         fill={true}
-        style={imageStyle}
+        className="rounded-full"
       />
     </div>
   );
