@@ -16,7 +16,7 @@ export default function Home() {
         <h4 className=" text-orange-500 italic text-center text-3xl">
           Discover your musical galaxy
         </h4>
-        <Link href={"/"}>
+        <Link href={"/login"}>
           <div className="relative w-fit mx-auto hover:-translate-y-4 transition-all duration-300">
             <button className="bg-[#9e8afe] px-12 py-8 text-center flex justify-center self-center 
             rounded-full shadow-2xl mx-auto mt-8 z-10">
@@ -25,7 +25,7 @@ export default function Home() {
               </span>
             </button>
             <div className="bg-[#6445ff] w-full h-24 rounded-full mx-auto absolute -bottom-3 left-1 -z-10">
-          </div>
+            </div>
           </div>
         </Link>
       </div>
