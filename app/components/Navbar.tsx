@@ -46,5 +46,5 @@ export default function Navbar() {
 }
 
 function textColour(route: string, selected: string) {
-  return route == selected ? "text-purple" : "text-white hover:scale-110";
+  return route == selected ? "text-purple" : "text-fontBlue hover:scale-110";
 }

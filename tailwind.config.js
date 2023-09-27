@@ -14,6 +14,8 @@ module.exports = {
       colors: {
         yellow: "#F9DB85",
         purple: "#9F8BFF",
+        backPurple: "#0E0149",
+        fontBlue: "#E2F4F3",
       },
       fontFamily: {
         jost: ['Jost', 'sans-serif'],
