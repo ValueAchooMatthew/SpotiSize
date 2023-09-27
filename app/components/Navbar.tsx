@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import Home from "../images/home.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,7 +14,7 @@ export default function Navbar() {
       <div className="flex justify-between items-center h-full w-full pr-5 pl-2 2xl:pr-8">
         <Link href="/">
           <Image
-            src={Home}
+            src={"/img/home.png"}
             alt="Home"
             width="100"
             height="100"
