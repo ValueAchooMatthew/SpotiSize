@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,7 +10,15 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        yellow: "#F9DB85",
+        purple: "#9F8BFF",
+      },
+      fontFamily: {
+        jost: ['Jost', 'sans-serif'],
+      }
+    },
   },
   plugins: [],
 };
