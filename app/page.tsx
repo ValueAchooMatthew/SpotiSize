@@ -6,11 +6,12 @@ export default function Home() {
   return (
     <main className="relative h-fit pb-40 overflow">
       <Image className="absolute -bottom-64 -left-64 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
-      <Image className="absolute -top-64 -right-80 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
+      <Image className="absolute -top-64 -right-80" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
       {/* <Image className="absolute -top-56 right-0 w-[40rem] h-[40rem]" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image> */}
       <Image className="absolute -top-24 right-32 w-80 h-80 z-10" width={1000} height={1000} src={"/img/saturn.svg"} alt="saturn image" ></Image>
       <Image className="absolute bottom-1/2 right-32 w-48 h-48 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-      <Image className="absolute bottom-20 right-96 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
+      <Image className="absolute bottom-32 right-64 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
+      <Image className="absolute bottom-12 left-64 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
       <Image className="absolute -top-32 right-1/2 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
       <Image className="absolute top-1/4 left-32 w-32 h-28 z-10 flip" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
 
@@ -31,11 +32,11 @@ export default function Home() {
 
       </div>
 
-      <div className="mt-24">
+      <div className="mt-18">
         <h4 className=" font-jost text-yellow italic text-center text-3xl">
           Discover your musical galaxy
         </h4>
-        <Link href={"/login"}>
+        <Link href={"/profile"}>
           <div className="relative w-fit mx-auto hover:-translate-y-4 transition-all duration-300 will-change-transform">
             <button className="bg-[#9e8afe] px-12 py-8 text-center flex justify-center self-center 
             rounded-full shadow-2xl mx-auto mt-8 z-10">

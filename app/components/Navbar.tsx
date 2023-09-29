@@ -9,7 +9,7 @@ export default function Navbar() {
   const tabs = `transition ml-10 hover:text-purple text-3xl font-medium`;
 
   return (
-    <nav className="w-full h-16 bg-transparent">
+    <nav className="fixed top-0 z-10 w-full h-16 bg-transparent">
       {/* Replace with Logo and "Spotisize" that we can design */}
       <div className="flex justify-between items-center h-full w-full pr-5 pl-2 2xl:pr-8">
         <Link href="/">
