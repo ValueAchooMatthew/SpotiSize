@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import SpotifyWebApi from "spotify-web-api-node";
+import Image from "next/image";
 
 
 type SpotifyError = { error: SpotifyApi.ErrorObject }
@@ -29,7 +30,10 @@ export default async function Songs() {
 
     return (<ul>
       {top_tracks.body.items.map((artist) => {
-        return <li key={artist.id}> Name: {artist.name} </li>
+        return (<>
+        <li key={artist.id}> Name: {artist.name} </li>
+        <Image width={300} height={300} src={artist.images[0].url} alt="artist image"></Image>
+        </>)
       })}
     </ul>)
 
