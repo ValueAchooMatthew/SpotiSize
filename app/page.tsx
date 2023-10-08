@@ -39,7 +39,7 @@ export default async function Home() {
 
       </div>
 
-      <div className="mt-18" onClick={() => signIn(providers?.spotify.id, {callbackUrl: "/songs"})}>
+      <div className="mt-18" onClick={() => signIn(providers?.spotify.id, {callbackUrl: "/profile"})}>
         <h4 className=" font-jost text-yellow italic text-center text-3xl">
           Discover your musical galaxy
         </h4>
