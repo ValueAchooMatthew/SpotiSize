@@ -7,7 +7,7 @@ export default async function Login() {
 
   return (
     <main>
-      <button onClick={() => signIn(providers?.spotify.id, {callbackUrl: "/songs"})}>Log in</button>
+      <button className="text-4xl text-white text-center mt-48" onClick={() => signIn(providers?.spotify.id, {callbackUrl: "/songs"})}>Log in</button>
     </main>
   )
 }
