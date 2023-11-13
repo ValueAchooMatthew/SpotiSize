@@ -14,7 +14,6 @@ type CirclePackingProps = {
   data: Node[];
 };
 
-
 export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
     // The force simulation mutates nodes, so create a copy first
     // Node positions are initialized by d3
@@ -34,9 +33,8 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
       if (!context) {
         return;
       }
-  
       // run d3-force to find the position of nodes on the canvas
-      d3.forceSimulation<Node>(nodes)
+      const simulation = d3.forceSimulation<Node>(nodes)
   
         // list of forces we apply to get node positions
         .force(
@@ -51,11 +49,48 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
         .on("tick", () => {
           drawCircles(context, width, height, nodes, sizeScale);
         });
+
+        // d3.select(canvas).call<DragEvent>(d3.drag<HTMLCanvasElement>())
+        // .call(d3.drag()
+        //   .subject(event => {
+        //     const [px, py] = d3.pointer(event, canvas);
+        //     return d3.least(nodes, ({x, y}) => {
+        //       const dist2 = (x - px) ** 2 + (y - py) ** 2;
+        //       if (dist2 < 400) return dist2;
+        //     });
+        //   })
+        //   .on("start", dragstarted)
+        //   .on("drag", dragged)
+        //   .on("end", dragended));
+
+        // function dragstarted(event) {
+        //   if (!event.active) simulation.alphaTarget(0.3).restart();
+        //   event.subject.fx = event.subject.x;
+        //   event.subject.fy = event.subject.y;
+        // }
+        
+        // // Update the subject (dragged node) position during drag.
+        // function dragged(event) {
+        //   event.subject.fx = event.x;
+        //   event.subject.fy = event.y;
+        // }
+        
+        // // Restore the target alpha so the simulation cools after dragging ends.
+        // // Unfix the subject position now that it’s no longer being dragged.
+        // function dragended(event) {
+        //   if (!event.active) simulation.alphaTarget(0);
+        //   event.subject.fx = null;
+        //   event.subject.fy = null;
+        // }
+
+        
     }, [width, height, nodes, sizeScale]);
+
+    
   
     return (
       <div>
-        <canvas
+        <canvas className="mt-32 ml-96"
           ref={canvasRef}
           style={{
             width,
