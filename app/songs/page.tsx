@@ -1,7 +1,8 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import SpotifyWebApi from "spotify-web-api-node";
-import Image from "next/image";
+import { Node } from "./data";
+import { CirclePacking } from "./CirclePacking";
 
 
 type SpotifyError = { error: SpotifyApi.ErrorObject }
@@ -19,7 +20,7 @@ async function getArtists(accessToken: String) {
   return data
 }
 
-export default async function Songs() {
+export default async function Songs({width = 700, height = 400 }) {
 
   const session = await getServerSession(authOptions)
   let accessToken = session?.user.accessToken;
@@ -27,15 +28,22 @@ export default async function Songs() {
     let api = new SpotifyWebApi();
     api.setAccessToken(accessToken);
     let top_tracks = await api.getMyTopArtists();
+    const data: Node[] =
+    
+      top_tracks.body.items.map((d, i)=>{
+        
+        const src = d.images[0].url
+        
 
-    return (<ul>
-      {top_tracks.body.items.map((artist) => {
-        return (<>
-        <li key={artist.id}> Name: {artist.name} </li>
-        <Image width={300} height={300} src={artist.images[0].url} alt="artist image"></Image>
-        </>)
-      })}
-    </ul>)
+        return {id: d.id, group: "Balls", value:8, img: src}
+      })
+
+    
+    console.log("data is:", data.length)
+
+    return (
+      <CirclePacking data={data} width={width} height={height}></CirclePacking>
+    )
 
   } else {
     return (<p>

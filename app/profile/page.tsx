@@ -27,7 +27,7 @@ export default async function Profile() {
           <Image className="absolute top-32 left-16" width={800} height={100} src={"/img/box.svg"} alt="box"></Image>
           <Image className="absolute top-40 left-24 w-36 h-36 rounded-full" width={800} height={800} src={"/img/profile.png"} alt="Rounded avatar"></Image>
           <h3 className="absolute top-80 left-24 h-16 w-fit text-fontBlue text-4xl">
-            {user.body.display_name}'s
+            {user.body.display_name}
           </h3>
           <h2 className="absolute top-[374px] left-24 h-16 w-16 text-fontBlue text-7xl font-bold">
               Galaxy
@@ -41,13 +41,11 @@ export default async function Profile() {
             </div>
           </Link>
         </div>
-
-
-
       </main>
     );
   }else{
-    return (<p>
+    return (
+    <p>
       Brick
     </p>)
   }

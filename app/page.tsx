@@ -11,11 +11,11 @@ export default async function Home() {
 
 
   return (
-    <main className="relative h-fit pb-40 overflow">
+    <main className="relative h-full pb-40 overflow-hidden">
       <Image className="absolute -bottom-64 -left-64 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
       <Image className="absolute -top-64 -right-80" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
       {/* <Image className="absolute -top-56 right-0 w-[40rem] h-[40rem]" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image> */}
-      <Image className="absolute -top-24 right-32 w-80 h-80 z-10" width={1000} height={1000} src={"/img/saturn.svg"} alt="saturn image" ></Image>
+      <Image className="absolute top-24 right-64 w-80 h-80 z-10" width={1000} height={1000} src={"/img/saturn.svg"} alt="saturn image" ></Image>
       <Image className="absolute bottom-1/2 right-32 w-48 h-48 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
       <Image className="absolute bottom-32 right-64 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
       <Image className="absolute bottom-12 left-64 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
