@@ -18,16 +18,28 @@ type CirclePackingProps = {
 export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
   // The force simulation mutates nodes, so create a copy first
   // Node positions are initialized by d3
-  const nodes: Node[] = data.map((d) => ({ ...d }));
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [min, max] = extent(nodes.map((d) => d.value)) as [number, number];
-  const sizeScale = scaleSqrt()
-    .domain([min, max])
-    .range([BUBBLE_MIN_SIZE, BUBBLE_MAX_SIZE]);
+
 
   useEffect(() => {
+    const nodes: Node[] = data.map((d) => {const picture = new Image(); 
+      picture.src = d.img; 
+      return {imageElement: picture, ...d }});
+      
+    const [min, max] = extent(nodes.map((d) => d.value)) as [number, number];
+    const sizeScale = scaleSqrt()
+      .domain([min, max])
+      .range([BUBBLE_MIN_SIZE, BUBBLE_MAX_SIZE]);
+
+    const images = nodes.forEach(node=>{
+      const image = new Image();
+      image.src = node.img;
+      return image
+    })
+
+
     // set dimension of the canvas element
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
@@ -42,10 +54,12 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
         "collide",
         d3.forceCollide<Node>().radius((node) => sizeScale(node.value) + 1)
       )
-      .force("charge", d3.forceManyBody().strength(80))
-      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("charge", d3.forceManyBody().strength(.002))
+      // .force("center", forceCenter(width / 2, height / 2))
       // .force("charge", d3.forceY(0).strength(0.05))
       // .force("charge", d3.forceX(0).strength(0.01))
+        .force("x", d3.forceX(width/2).strength(.056))
+        .force("y", d3.forceY(height/2).strength(.056))
 
       // at each iteration of the simulation, draw the network diagram with the new node positions
       .on("tick", () => {
@@ -56,10 +70,11 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
     const drag = d3.drag<HTMLCanvasElement, Node>().subject((event, d: Node) => {
       const [px, py] = d3.pointer(event, context.canvas);
       const least = d3.least(nodes, (node) => {
-        if (node.x && node.y) {
-          return Math.sqrt((px - node.x) ^ 2 + (py - node.y) ^ 2);
+        
+        if (node.x != undefined && node.y != undefined) {
+          return Math.sqrt((px - node.x)**2 + (py - node.y)**2);
         }
-        return 10000000000;
+        return 1;
       });
       const fallback: SubjectPosition = { x: 0, y: 0 };
       if (least) { return least } else { return fallback };
@@ -68,7 +83,7 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
       .on("end", dragended);
 
     d3.select<HTMLCanvasElement, Node>(context.canvas)
-      .call((deez) => { drag(deez) })
+      .call(drag)
     function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; }; }) {
       console.log("deez")
       if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -91,13 +106,13 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
     }
 
 
-  }, [width, height, nodes, sizeScale]);
+  }, [width, height, data]);
 
 
 
   return (
     <div>
-      <canvas className="mt-32 ml-96"
+      <canvas className="mt-16 ml-64"
         ref={canvasRef}
         style={{
           width,

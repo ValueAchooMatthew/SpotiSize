@@ -5,32 +5,18 @@ import { Node } from "./data";
 import { CirclePacking } from "./CirclePacking";
 
 
-type SpotifyError = { error: SpotifyApi.ErrorObject }
 
-async function getArtists(accessToken: String) {
-
-  const response = await fetch('https://api.spotify.com/v1/me/top/artists', {
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  });
-
-  const data: SpotifyApi.UsersTopArtistsResponse | SpotifyError = await response.json();
-  // await new Promise(r => setTimeout(r, 2000)) //Simulate throttle to test loading animation
-  return data
-}
-
-export default async function Songs({width = 700, height = 400 }) {
+export default async function Songs({width = 900, height = 900 }) {
 
   const session = await getServerSession(authOptions)
   let accessToken = session?.user.accessToken;
   if (accessToken) {
     let api = new SpotifyWebApi();
     api.setAccessToken(accessToken);
-    let top_tracks = await api.getMyTopArtists();
+    let top_artists = await api.getMyTopArtists({limit: 30, time_range: "long_term"});
     const data: Node[] =
     
-      top_tracks.body.items.map((d, i)=>{
+      top_artists.body.items.map((d, i)=>{
         
         const src = d.images[0].url
         

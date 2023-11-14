@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import { scaleOrdinal, ScalePower } from "d3";
 import { Node } from "./data";
 
-const drag = d3.drag();
+
 
 export const drawCircles = (
   context: CanvasRenderingContext2D,
@@ -16,6 +16,8 @@ export const drawCircles = (
   // const colorScale = scaleOrdinal<string>().domain(allGroups).range(COLORS);
 
   context.clearRect(0, 0, width, height);
+  const nevin = new Image();
+  nevin.src = "https://lh3.googleusercontent.com/lXipIN8aMbHw8jVNMmaqGuUlT8lsfktsC8M6c130drR2t8K0r6xfq88EVHoKMSyQQbmoqAar4RKqQNI=w544-h544-p-l90-rj"
 
   // Draw the nodes
   nodes.forEach((node) => {
@@ -29,10 +31,11 @@ export const drawCircles = (
     context.clip();
     // context.fillStyle = colorScale(node.group);
     // context.fill();
-    const image = new Image();
-    image.src = node.img;
+    // const image = new Image();
+    // image.src = node.img;
 
-    context.drawImage(image, node.x - 40, node.y - 40, 80, 80);
+    context.drawImage(node.imageElement ??nevin, node.x - 40, node.y - 40, 80, 80);
     context.restore();
+
   });
 };
