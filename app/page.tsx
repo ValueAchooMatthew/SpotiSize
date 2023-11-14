@@ -1,5 +1,5 @@
 'use client'
-import {getProviders, signIn} from "next-auth/react"
+import { getProviders, signIn } from "next-auth/react"
 
 import Image from "next/image";
 import Link from "next/link";
@@ -39,13 +39,13 @@ export default async function Home() {
 
       </div>
 
-      <div className="mt-18" onClick={() => signIn(providers?.spotify.id, {callbackUrl: "/profile"})}>
+      <div className="mt-18" onClick={() => signIn(providers?.spotify.id, { callbackUrl: "/profile" })}>
         <h4 className=" font-jost text-yellow italic text-center text-3xl">
           Discover your musical galaxy
         </h4>
 
         <div className="relative w-fit mx-auto hover:-translate-y-4 transition-all duration-300 will-change-transform">
-          <button  className="bg-[#9e8afe] px-12 py-8 text-center flex justify-center self-center 
+          <button className="bg-[#9e8afe] px-12 py-8 text-center flex justify-center self-center 
           rounded-full shadow-2xl mx-auto mt-8 z-10" >
             <span className="font-jost text-4xl text-white font-bold" >
               Log in With Spotify
