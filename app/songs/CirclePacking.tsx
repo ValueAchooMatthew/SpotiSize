@@ -33,11 +33,11 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
       .domain([min, max])
       .range([BUBBLE_MIN_SIZE, BUBBLE_MAX_SIZE]);
 
-    const images = nodes.forEach(node=>{
-      const image = new Image();
-      image.src = node.img;
-      return image
-    })
+    // const images = nodes.forEach(node=>{
+    //   const image = new Image();
+    //   image.src = node.img;
+    //   return image
+    // })
 
 
     // set dimension of the canvas element
@@ -48,18 +48,19 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
     }
     // run d3-force to find the position of nodes on the canvas
     const simulation = d3.forceSimulation<Node>(nodes)
+      
 
       // list of forces we apply to get node positions
       .force(
         "collide",
-        d3.forceCollide<Node>().radius((node) => sizeScale(node.value) + 1)
+        d3.forceCollide<Node>().radius((node) => sizeScale(node.value)/2 +30)
       )
       .force("charge", d3.forceManyBody().strength(.002))
       // .force("center", forceCenter(width / 2, height / 2))
       // .force("charge", d3.forceY(0).strength(0.05))
       // .force("charge", d3.forceX(0).strength(0.01))
-        .force("x", d3.forceX(width/2).strength(.056))
-        .force("y", d3.forceY(height/2).strength(.056))
+        .force("x", d3.forceX(width/2).strength(.03))
+        .force("y", d3.forceY(height/2).strength(.03)) 
 
       // at each iteration of the simulation, draw the network diagram with the new node positions
       .on("tick", () => {
@@ -72,7 +73,7 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
       const least = d3.least(nodes, (node) => {
         
         if (node.x != undefined && node.y != undefined) {
-          return Math.sqrt((px - node.x)**2 + (py - node.y)**2);
+          return Math.sqrt((px - (node.x))**2 + (py - (node.y))**2);
         }
         return 1;
       });
@@ -111,8 +112,8 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
 
 
   return (
-    <div>
-      <canvas className="mt-16 ml-64"
+    <div className="flex justify-center mt-96 z-50 ">
+      <canvas className="z-50 rounded-full border-4 border-black"
         ref={canvasRef}
         style={{
           width,

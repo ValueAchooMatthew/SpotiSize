@@ -4,16 +4,17 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { Node } from "./data";
 import { CirclePacking } from "./CirclePacking";
 
+const width: number = 650;
+const height: number = 650;
 
-
-export default async function Songs({width = 900, height = 900 }) {
+export default async function Songs() {
 
   const session = await getServerSession(authOptions)
   let accessToken = session?.user.accessToken;
   if (accessToken) {
     let api = new SpotifyWebApi();
     api.setAccessToken(accessToken);
-    let top_artists = await api.getMyTopArtists({limit: 30, time_range: "long_term"});
+    let top_artists = await api.getMyTopArtists({limit: 25, time_range: "medium_term"});
     const data: Node[] =
     
       top_artists.body.items.map((d, i)=>{
@@ -21,7 +22,7 @@ export default async function Songs({width = 900, height = 900 }) {
         const src = d.images[0].url
         
 
-        return {id: d.id, group: "Balls", value:8, img: src}
+        return {id: d.id, group: "Balls", value:Math.exp(8*top_artists.body.items.length - .12*i), img: src}
       })
 
     

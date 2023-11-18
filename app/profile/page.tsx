@@ -1,11 +1,18 @@
+// 'use client';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import SpotifyWebApi from "spotify-web-api-node";
 import Image from "next/image";
 import Link from "next/link";
+import Songs from "../songs/page";
+import { useState } from "react";
+// import Slider from "../components/Slider";
+
+
 
 
 export default async function Profile() {
+  // const [range, setRange]= useState("medium_term");
   const session = await getServerSession(authOptions)
   const accessToken = session?.user.accessToken;
   if (accessToken) {
@@ -23,7 +30,7 @@ export default async function Profile() {
         <Image className="absolute top-1/4 left-32 w-32 h-28 z-10 flip" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image> */}
         <Image className=" absolute top-24 right-16 w-96 h-80 " width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
 
-        <div className="box-content Relative h-32 w-32 font-jost">
+        <div className="box-content h-16 w-16 font-jost">
           <Image className="absolute top-32 left-16" width={800} height={100} src={"/img/box.svg"} alt="box"></Image>
           <Image className="absolute top-40 left-24 w-36 h-36 rounded-full" width={800} height={800} src={"/img/profile.png"} alt="Rounded avatar"></Image>
           <h3 className="absolute top-80 left-24 h-16 w-fit text-fontBlue text-4xl">
@@ -41,6 +48,33 @@ export default async function Profile() {
             </div>
           </Link>
         </div>
+        <div className="z-50">
+          <div className="z-50">
+            <Songs></Songs>
+          </div>
+          <div>
+            {/* <Slider></Slider> */}
+          </div>
+        </div>
+        <div className="flex-col">
+          <h2>
+            Select Time Range
+          </h2>
+
+          {/* <div className="flex justify-center">
+            <button onClick={()=>{setRange("short_term")}}>
+              Short term
+            </button>
+            <button onClick={()=>{setRange("medium_term")}}>
+              Medium term
+            </button>
+            <button onClick={()=>{setRange("long_term")}}>
+              Long term
+            </button>
+          </div> */}
+        </div>
+
+
       </main>
     );
   }else{
