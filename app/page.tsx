@@ -1,13 +1,9 @@
 'use client'
-import { getProviders, signIn } from "next-auth/react"
-
+import { signIn } from "next-auth/react"
 import Image from "next/image";
-import Link from "next/link";
 
 
-export default async function Home() {
-
-  const providers = await getProviders();
+export default function Home() {
 
 
   return (
@@ -39,7 +35,7 @@ export default async function Home() {
 
       </div>
 
-      <div className="mt-18" onClick={() => signIn(providers?.spotify.id, { callbackUrl: "/profile" })}>
+      <div className="mt-18" onClick={() => signIn("spotify", { callbackUrl: "/profile" })}>
         <h4 className=" font-jost text-yellow italic text-center text-3xl">
           Discover your musical galaxy
         </h4>

@@ -1,25 +1,56 @@
-// 'use client';
+'use client';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import SpotifyWebApi from "spotify-web-api-node";
 import Image from "next/image";
 import Link from "next/link";
-import Songs from "../songs/page";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Node } from "../songs/data";
+import { CirclePacking } from "../songs/CirclePacking";
+
 // import Slider from "../components/Slider";
 
+const width: number = 650;
+const height: number = 650;
 
+export default function Profile() {
+  const [range, setRange]= useState<"medium_term" | "long_term" | "short_term" | undefined>("medium_term");
+  const [api, setApi] = useState<SpotifyWebApi | undefined>(undefined)
+  const [user, setUser] = useState<SpotifyApi.CurrentUsersProfileResponse | undefined>(undefined);
+  const [data, setData] = useState<Node[] | undefined>()
 
+  useEffect(()=>{
+     const balls = async ()=>{
+      const session = await getServerSession(authOptions)
+      const accessToken = session?.user.accessToken;
+      if(accessToken){
+        const api = new SpotifyWebApi();
+        api.setAccessToken(accessToken);
+        setApi(api);
+        let top_artists = await api.getMyTopArtists({limit: 25, time_range: range});
+        const data: Node[] =
+    
+        top_artists.body.items.map((d, i)=>{
+          const src = d.images[0].url
+          return {id: d.id, group: "Balls", value:Math.exp(8*top_artists.body.items.length - .12*i), img: src}
+        })
+        setData(data);
+      }
+    }
+    balls();
+    }, [range])
 
-export default async function Profile() {
-  // const [range, setRange]= useState("medium_term");
-  const session = await getServerSession(authOptions)
-  const accessToken = session?.user.accessToken;
-  if (accessToken) {
-    const api = new SpotifyWebApi();
-    api.setAccessToken(accessToken);
-    const top_tracks = await api.getMyTopArtists();
-    const user = await api.getMe();
+  useEffect(()=>{
+      if(api){
+        api.getMe().then((user)=>{
+          setUser(user.body);
+        }).catch(
+          console.log
+        )
+      }
+    
+  }, [api])
+
     return (
       <main>
         <Image className="absolute -bottom-64 -left-64 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
@@ -34,7 +65,7 @@ export default async function Profile() {
           <Image className="absolute top-32 left-16" width={800} height={100} src={"/img/box.svg"} alt="box"></Image>
           <Image className="absolute top-40 left-24 w-36 h-36 rounded-full" width={800} height={800} src={"/img/profile.png"} alt="Rounded avatar"></Image>
           <h3 className="absolute top-80 left-24 h-16 w-fit text-fontBlue text-4xl">
-            {user.body.display_name}
+            {user?.display_name ?? "error"}
           </h3>
           <h2 className="absolute top-[374px] left-24 h-16 w-16 text-fontBlue text-7xl font-bold">
               Galaxy
@@ -50,18 +81,18 @@ export default async function Profile() {
         </div>
         <div className="z-50">
           <div className="z-50">
-            <Songs></Songs>
+            {data? <CirclePacking data={data} width={width} height={height}></CirclePacking>:<p>Whoops! Looks like we ran into an error!</p>}
           </div>
           <div>
             {/* <Slider></Slider> */}
           </div>
         </div>
         <div className="flex-col">
-          <h2>
+          <h2 className="text-center">
             Select Time Range
           </h2>
 
-          {/* <div className="flex justify-center">
+          <div className="flex justify-center">
             <button onClick={()=>{setRange("short_term")}}>
               Short term
             </button>
@@ -71,16 +102,8 @@ export default async function Profile() {
             <button onClick={()=>{setRange("long_term")}}>
               Long term
             </button>
-          </div> */}
+          </div>
         </div>
-
-
       </main>
     );
-  }else{
-    return (
-    <p>
-      Brick
-    </p>)
-  }
 }
