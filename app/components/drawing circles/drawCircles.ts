@@ -33,7 +33,6 @@ export const drawCircles = (
     // context.fill();
     // const image = new Image();
     // image.src = node.img;
-
     context.drawImage(node.imageElement ??nevin, node.x-sizeScale(node.value)/2-30, node.y-sizeScale(node.value)/2-30, sizeScale(node.value)+60, sizeScale(node.value)+60);
 
     context.restore();
