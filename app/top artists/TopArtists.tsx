@@ -14,7 +14,6 @@ export default function TopArtists({accessToken}: {accessToken: string}){
         const retrieve = async () =>{
             const api = new SpotifyWebApi();
             api.setAccessToken(accessToken);
-            const user = await api.getMe();
             let topArtists = await api.getMyTopArtists({limit: limit, time_range: range});
             const data: Node[] =
             topArtists.body.items.map((d, i)=>{
@@ -24,17 +23,17 @@ export default function TopArtists({accessToken}: {accessToken: string}){
             setData(data);
         }
         retrieve();
-    }, [range])
+    }, [accessToken, limit, range])
 
     if(data){
         return(
             <>
                 <CirclePacking width={650} height={650} data = {data}></CirclePacking>
-                <div className="flex-col ">
+                <div className="flex-col z-50">
                     <h1 className="text-4xl text-white font-bold text-center">
                         Choose your timeframe
                     </h1>
-                    <div className="text-white text-3xl flex justify-center">
+                    <div className="text-white text-3xl flex justify-center z-50">
                         <button className="px-8" onClick={()=>{setRange("short_term")}}>
                             Short term
                         </button>
