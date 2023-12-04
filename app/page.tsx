@@ -35,7 +35,10 @@ export default function Home() {
 
       </div>
 
-      <div className="mt-18" onClick={() => signIn("spotify", { callbackUrl: "/profile" })}>
+      <div className="mt-18" 
+      onClick={() => signIn("spotify", { callbackUrl: "/profile" })}
+      // onClick={(event)=>{console.log(event)}}
+      >
         <h4 className=" font-jost text-yellow italic text-center text-3xl">
           Discover your musical galaxy
         </h4>

@@ -18,41 +18,37 @@ export default async function Profile() {
     if(accessToken){
       return (
         <main>
+
+
           <Image className="absolute -bottom-64 -left-64 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
           <Image className="absolute -top-64 -right-80 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
-          {/* <Image className="absolute bottom-1/2 right-32 w-48 h-48 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-          <Image className="absolute bottom-20 right-96 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-          <Image className="absolute -top-32 right-1/2 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-          <Image className="absolute top-1/4 left-32 w-32 h-28 z-10 flip" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image> */}
-          <Image className=" absolute top-24 right-16 w-96 h-80 -z-20" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
+          <Image className="absolute top-24 right-16 w-96 h-80 -z-20" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
   
-          <div className="box-content h-16 w-16 font-jost">
-            <Image className="absolute top-32 left-16 " width={800} height={100} src={"/img/box.svg"} alt="box"></Image>
-            {/* <Image  width={800} height={800} src={"/img/profile.png"} alt="Rounded avatar"></Image> */}
-              <div className="absolute top-40 left-24 rounded-full">
-                <DisplayPFP  accessToken={accessToken}></DisplayPFP>
-              </div>
-            <h3 className="absolute top-80 left-24 h-16 w-fit text-fontBlue text-4xl">
-              <DisplayUsername accessToken={accessToken}></DisplayUsername>
-              
-            </h3>
-            <h2 className="absolute top-[374px] left-24 h-16 w-16 text-fontBlue text-7xl font-bold">
+          <div className="box-content font-jost flex ml-20 mt-20 w-fit h-fit bg-gray-300 z-50 bg-opacity-60 rounded-[3rem] px-12 py-8">
+            <div>
+                <DisplayPFP accessToken={accessToken}></DisplayPFP>
+              <h3 className="text-fontBlue text-6xl py-1.5">
+                <DisplayUsername accessToken={accessToken}></DisplayUsername>
+              </h3>
+              <h2 className="= text-fontBlue text-7xl pl-24 font-bold">
                 Galaxy
-            </h2>
-            <Link href={"/login"}>
-              <div className="absolute top-[155px] left-[700px] w-fit mx-auto hover:-translate-y-2 transition-all duration-300 will-change-transform">
-              <button className="bg-lightPurple hover:bg-yellow text-white text-2xl font-bold font-jost py-2 px-4 rounded-full">
-                Log Out
-                </button>
-                <button className="bg-[#6545FF] w-full h-10 rounded-full mx-auto absolute -bottom-1.5 left-1 -z-10"></button>
-              </div>
-            </Link>
-          </div>
-          <div className="z-50">
-            <div className="z-50">
-              <TopArtists accessToken = {accessToken}></TopArtists>
+              </h2>
             </div>
+              <div className="justify-self-center">
+                <Link href={"/login"}>
+                  <div className="w-fit mx-auto hover:-translate-y-2 transition-all duration-300 will-change-transform">
+                  <button className="bg-lightPurple hover:bg-yellow text-white text-2xl font-bold font-jost py-2 px-4 rounded-full">
+                    Log Out
+                    </button>
+                    <button className="bg-[#6545FF] w-full h-10 rounded-full mx-auto absolute -bottom-1.5 left-1 -z-10"></button>
+                  </div>
+                </Link>
+              </div>
+
+
           </div>
+          <TopArtists accessToken = {accessToken}></TopArtists>
+
         </main>
       );
     }else{

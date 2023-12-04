@@ -86,7 +86,6 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
     d3.select<HTMLCanvasElement, Node>(context.canvas)
       .call(drag)
     function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; }; }) {
-      console.log("deez")
       if (!event.active) simulation.alphaTarget(0.3).restart();
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
@@ -112,8 +111,7 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
 
 
   return (
-    <div className="flex justify-center mt-96 z-50 ">
-      <canvas className="z-50 rounded-full border-4 border-black"
+      <canvas className="z-50 rounded-full border-4 border-black" 
         ref={canvasRef}
         style={{
           width,
@@ -122,7 +120,6 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
         width={width}
         height={height}
       />
-    </div>
   );
 };
 

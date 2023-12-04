@@ -15,7 +15,7 @@ export const drawCircles = (
 
   context.clearRect(0, 0, width, height);
   const nevin = new Image();
-  nevin.src = "https://lh3.googleusercontent.com/lXipIN8aMbHw8jVNMmaqGuUlT8lsfktsC8M6c130drR2t8K0r6xfq88EVHoKMSyQQbmoqAar4RKqQNI=w544-h544-p-l90-rj"
+  nevin.src = "https://highprofiles.info/wp-content/uploads/2016/04/Yorke-main-900x600.jpg"
 
   // Draw the nodes
   nodes.forEach((node, i) => {

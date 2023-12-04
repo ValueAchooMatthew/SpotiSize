@@ -1,0 +1,4 @@
+input[type=range][aria-orientation=vertical] {
+    appearance: slider-vertical;
+
+}
