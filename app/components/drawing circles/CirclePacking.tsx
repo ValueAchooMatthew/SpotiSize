@@ -1,6 +1,6 @@
 'use client';
 import * as d3 from "d3";
-import { useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { drawCircles } from "./drawCircles";
 import { Node } from "./data";
 import { scaleSqrt, extent } from "d3";
@@ -13,9 +13,10 @@ type CirclePackingProps = {
   width: number;
   height: number;
   data: Node[];
+  setInformation: Dispatch<SetStateAction<Object>>
 };
 
-export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
+export const CirclePacking = ({ width, height, data, setInformation}: CirclePackingProps) => {
   // The force simulation mutates nodes, so create a copy first
   // Node positions are initialized by d3
 
@@ -89,6 +90,7 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
+      setInformation(event.subject);
     }
 
     // Update the subject (dragged node) position during drag.
@@ -106,7 +108,7 @@ export const CirclePacking = ({ width, height, data }: CirclePackingProps) => {
     }
 
 
-  }, [width, height, data]);
+  }, [width, height, data, setInformation]);
 
 
 

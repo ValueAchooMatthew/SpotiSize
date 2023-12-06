@@ -18,13 +18,11 @@ export default async function Profile() {
     if(accessToken){
       return (
         <main>
-
-
-          <Image className="absolute -bottom-64 -left-64 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
+          <Image className="absolute -bottom-0 -left-64 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
           <Image className="absolute -top-64 -right-80 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
           <Image className="absolute top-24 right-16 w-96 h-80 -z-20" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
   
-          <div className="box-content font-jost flex ml-20 mt-20 w-fit h-fit bg-gray-300 z-50 bg-opacity-60 rounded-[3rem] px-12 py-8">
+          <div className="box-content font-jost flex ml-12 mt-20 w-fit h-fit bg-gray-300 z-50 bg-opacity-60 rounded-[3rem] px-12 py-8">
             <div>
                 <DisplayPFP accessToken={accessToken}></DisplayPFP>
               <h3 className="text-fontBlue text-6xl py-1.5">
@@ -35,7 +33,7 @@ export default async function Profile() {
               </h2>
             </div>
               <div className="justify-self-center">
-                <Link href={"/login"}>
+                <Link href={"/"}>
                   <div className="w-fit mx-auto hover:-translate-y-2 transition-all duration-300 will-change-transform">
                   <button className="bg-lightPurple hover:bg-yellow text-white text-2xl font-bold font-jost py-2 px-4 rounded-full">
                     Log Out
