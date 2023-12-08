@@ -9,7 +9,11 @@ export default function capitalizeFirstLetter(phrase: string){
                 word[i] = word[i].toUpperCase();
             }
         }
+        return word.join("");
 
     }
-    return word.join("");
+
+    else{
+        return ("No Listed Genre")
+    }
 }

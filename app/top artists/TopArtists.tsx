@@ -25,22 +25,39 @@ export default function TopArtists({accessToken}: {accessToken: string}){
         const retrieve = async () =>{
             const api = new SpotifyWebApi();
             api.setAccessToken(accessToken);
-            let topArtists = await api.getMyTopArtists({limit: limit, time_range: range});
-            const data: Node[] =
-            topArtists.body.items.map((d, i)=>{
-              const src = d.images[0].url;
-              return {id: d.id, page: topArtists.body.items[i].uri, group: capitalizeFirstLetter(topArtists.body.items[i].genres[0]), 
-                value:Math.exp(20*topArtists.body.items.length - .12*i), img: src, name: topArtists.body.items[i].name}
-            })
-            setData(data);
+            if(view == "artist_view"){
+                const response = await api.getMyTopArtists({limit: limit, time_range: range});
+                const topArtists = response.body.items;
+                const data: Node[] =
+                topArtists.map((d, i)=>{
+                  const src = d.images[0].url;
+                  return {id: d.id, page: topArtists[i].uri, group: capitalizeFirstLetter(topArtists[i].genres[0]), 
+                    value:Math.exp(20*topArtists.length - .12*i), img: src, name: topArtists[i].name}
+                })
+                setData(data);
+            }else{
+                const response = await api.getMyTopTracks({limit: limit, time_range: range});
+                const topTracks = response.body.items;
+                console.log(topTracks);
+                // TODO: Address how to handle local hosted songs
+                const data: Node[]  =
+                topTracks.map((d, i)=>{
+                    return {id: d.id, page: topTracks[i].uri,
+                        value:Math.exp(20*topTracks.length - .12*i), img: topTracks[i].album.images[0].url, name: topTracks[i].name,
+                        artist:topTracks[i].artists[0].name}
+
+                })
+                setData(data);
+            }
+
         }
         retrieve();
-    }, [accessToken, limit, range])
+    }, [accessToken, limit, range, view])
 
     if(data){
         return(
-            <div className="flex justify-center h-[75rem]">
-                <div className="flex bg-gray-200 rounded-[5rem] bg-opacity-40 m-12 p-24 justify-end w-full mx-12">
+            <div className="flex justify-start h-[75rem]">
+                <div className="flex bg-gray-200 rounded-[5rem] bg-opacity-40 mx-auto py-24 px-32 justify-end w-fit my-12">
                     <div className="flex flex-col p-12 border-4 border-black rounded-[5rem] bg-gradient-to-b from-[#11005e] to-[#080135b7]">
                         <CirclePacking width={650} height={650} data = {data} setInformation={setInformation}></CirclePacking>
                         <span className="text-center text-fontBlue my-4 text-3xl font-semibold">Number of artists: {limit}</span>
@@ -121,10 +138,10 @@ export default function TopArtists({accessToken}: {accessToken: string}){
                                         View
                                     </span>
                                     <div className="flex mt-4 w-full justify-around text-3xl">
-                                        <button onClick={()=>{setView("artist_view")}}>
+                                        <button onClick={()=>{if(view != "artist_view"){setInformation(undefined)} setView("artist_view")}}>
                                             Artist View
                                         </button>
-                                        <button onClick={()=>{setView("track_view")}}>
+                                        <button onClick={()=>{if(view != "track_view"){setInformation(undefined)}setView("track_view")}}>
                                             Track View
                                         </button>
                                     </div>

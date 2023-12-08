@@ -18,8 +18,8 @@ export default async function Profile() {
     if(accessToken){
       return (
         <main className="w-full p-12">
-          <Image className="absolute -bottom-0 -left-64 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
-          <Image className="absolute -top-64 -right-80 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
+          {/* {/* <Image className="absolute -bottom-0 -left-64 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
+          <Image className="absolute -top-64 -right-80 -z-20 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image> */}
           <Image className="absolute top-24 right-16 w-96 h-80 -z-20" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
   
           <div className="box-content font-jost flex ml-12 mt-20 w-fit h-fit bg-gray-300 z-50 bg-opacity-60 rounded-[3rem] px-12 py-8">

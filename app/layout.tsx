@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="overflow-x-hidden">
+    <html lang="en">
       <body className={inter.className + " bg-gradient-to-b from-[#11005e] to-slate-950 min-h-screen h-fit min-w-fit w-full"} >
         <Navbar></Navbar>
         {children}
