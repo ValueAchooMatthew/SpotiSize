@@ -7,3 +7,12 @@ export interface Node extends d3.SimulationNodeDatum {
   img: string;
   imageElement?: HTMLImageElement;
 }
+
+export default interface Info{
+  
+  name: string,
+  group: string,
+  img: string,
+  index: number,
+  page: string
+};

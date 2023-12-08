@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { drawCircles } from "./drawCircles";
 import { Node } from "./data";
+import Info from "./data";
 import { scaleSqrt, extent } from "d3";
 import { SubjectPosition } from "d3";
 
@@ -13,7 +14,7 @@ type CirclePackingProps = {
   width: number;
   height: number;
   data: Node[];
-  setInformation: Dispatch<SetStateAction<Object>>
+  setInformation: Dispatch<SetStateAction<Info | undefined>>
 };
 
 export const CirclePacking = ({ width, height, data, setInformation}: CirclePackingProps) => {
@@ -21,9 +22,6 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
   // Node positions are initialized by d3
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-
-
   useEffect(() => {
     const nodes: Node[] = data.map((d) => {const picture = new Image(); 
       picture.src = d.img; 
@@ -48,7 +46,9 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
       return;
     }
     // run d3-force to find the position of nodes on the canvas
+    //TODO: .alpha
     const simulation = d3.forceSimulation<Node>(nodes)
+      // .alphaDecay(.01)
       
 
       // list of forces we apply to get node positions
@@ -56,10 +56,10 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
         "collide",
         d3.forceCollide<Node>().radius((node) => sizeScale(node.value)/2 +30)
       )
-      .force("charge", d3.forceManyBody().strength(.002))
-      // .force("center", forceCenter(width / 2, height / 2))
-      // .force("charge", d3.forceY(0).strength(0.05))
-      // .force("charge", d3.forceX(0).strength(0.01))
+        .force("charge", d3.forceManyBody().strength(.002))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        // .force("charge", d3.forceY(0).strength(0.05))
+        // .force("charge", d3.forceX(0).strength(0.01))
         .force("x", d3.forceX(width/2).strength(.03))
         .force("y", d3.forceY(height/2).strength(.03)) 
 
@@ -83,15 +83,24 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
     }).on("start", dragstarted)
       .on("drag", dragged)
       .on("end", dragended);
+    
 
     d3.select<HTMLCanvasElement, Node>(context.canvas)
       .call(drag)
-    function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; }; }) {
+    function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; name: string; group: string; img:string; index:number; page:string;}; }) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
-      setInformation(event.subject);
+      setInformation({
+        name:event.subject.name,
+        group:event.subject.group,
+        img:event.subject.img,
+        index:event.subject.index,
+        page:event.subject.page
+      })
     }
+    
+    //TODO: Fix any because maxim says 
 
     // Update the subject (dragged node) position during drag.
     function dragged(event: { subject: { fx: any; fy: any; }; x: any; y: any; }) {
