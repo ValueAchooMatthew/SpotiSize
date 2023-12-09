@@ -32,13 +32,6 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
       .domain([min, max])
       .range([BUBBLE_MIN_SIZE, BUBBLE_MAX_SIZE]);
 
-    // const images = nodes.forEach(node=>{
-    //   const image = new Image();
-    //   image.src = node.img;
-    //   return image
-    // })
-
-
     // set dimension of the canvas element
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
@@ -87,7 +80,7 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
 
     d3.select<HTMLCanvasElement, Node>(context.canvas)
       .call(drag)
-    function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; name: string; group: string; img:string; index:number; page:string;}; }) {
+    function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; name: string; group: string; img:string; index:number; page:string; artist:string}; }) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
@@ -96,7 +89,8 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
         group:event.subject.group,
         img:event.subject.img,
         index:event.subject.index,
-        page:event.subject.page
+        page:event.subject.page,
+        artist:event.subject.artist
       })
     }
     

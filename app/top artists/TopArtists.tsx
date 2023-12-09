@@ -12,10 +12,12 @@ import Info from "../components/drawing circles/data";
 import SpotifyWebApi from "spotify-web-api-node";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import "./styles.css"
 
 export default function TopArtists({accessToken}: {accessToken: string}){
-
+    function textColour(name: string, selected?: string) {
+        return name == selected ? "text-purple" : "hover:scale-110";
+      }
+      
     const [data, setData] = useState<Node[]>();
     const [range, setRange] = useState<"short_term" | "medium_term" | "long_term" | undefined>("medium_term");
     const [limit, setLimit] = useState<number>(25);
@@ -38,7 +40,6 @@ export default function TopArtists({accessToken}: {accessToken: string}){
             }else{
                 const response = await api.getMyTopTracks({limit: limit, time_range: range});
                 const topTracks = response.body.items;
-                console.log(topTracks);
                 // TODO: Address how to handle local hosted songs
                 const data: Node[]  =
                 topTracks.map((d, i)=>{
@@ -53,15 +54,62 @@ export default function TopArtists({accessToken}: {accessToken: string}){
         }
         retrieve();
     }, [accessToken, limit, range, view])
-
     if(data){
         return(
-            <div className="flex justify-start h-[75rem]">
-                <div className="flex bg-gray-200 rounded-[5rem] bg-opacity-40 mx-auto py-24 px-32 justify-end w-fit my-12">
-                    <div className="flex flex-col p-12 border-4 border-black rounded-[5rem] bg-gradient-to-b from-[#11005e] to-[#080135b7]">
-                        <CirclePacking width={650} height={650} data = {data} setInformation={setInformation}></CirclePacking>
+            <div className="flex h-fit">
+                <div className="2xl:flex 2xl:flex-row flex-col justify-center bg-gray-200 rounded-[5rem] bg-opacity-40 mx-auto p-12 w-fit my-4 ">
+                    <div className="2xl:hidden flex flex-col min-h-fit h-[20rem] p-8 text-center min-w-full w-[40rem] border-4 border-black rounded-[5rem] justify-center mb-8">
+                            {view == "artist_view"? 
+                            <span className={"text-4xl text-fontBlue text-center font-semibold"}>
+                                Artist Info
+                            </span>
+                            :
+                            <span className={"text-4xl text-fontBlue text-center font-semibold"}>
+                                Track Info
+                            </span>
+                            }
+                            {information ? (
+                            <div className="flex mt-4 justify-between align-middle">
+                                <div className="self-center flex justify-center overflow-hidden w-40 h-40 rounded-2xl mx-6 flex-shrink-0">
+                                    <Link href={{pathname: information.page}}>
+                                        <Image className = "w-40 h-40 object-cover overflow-hidden transition-all duration-300 " width={1000} height={1000} src={information.img} alt={"spotify page photo"}></Image>
+                                    </Link>
+                                </div>
+                                <div className="flex flex-col justify-self-end self-center justify-center mt-4 w-full">
+                                    <span className="text-3xl mb-4">
+                                        {information.name}
+                                    </span>
+                                    {view == "artist_view"?
+                                        (
+                                        <span className="text-xl">
+                                            Genre: {information.group}
+                                        </span>
+                                        ):(
+                                        <span className="text-xl">
+                                            Artist: {information.artist}
+                                        </span>
+                                        )
+                                    }
+
+                                    <span className="text-xl">
+                                        Rank in this timeframe: {information.index + 1}/{limit}
+                                    </span>
+                                </div>
+                            </div>):
+                                <div className="text-black text-3xl mt-12">
+                                    Click on an artist to see more information    
+                                </div>}
+
+                            </div>
+                    <div className="2xl:mb-0 mb-0 flex flex-col justify-center align-middle p-12 border-4 border-black rounded-[5rem] bg-gradient-to-b from-[#11005e] to-[#080135b7]">
+                
+                        <div className="flex justify-center">
+                            <CirclePacking width={650} height={650} data = {data} setInformation={setInformation}></CirclePacking>
+                        </div>
                         <span className="text-center text-fontBlue my-4 text-3xl font-semibold">Number of artists: {limit}</span>
                         <div className="mx-12 self-center flex w-[30rem] justify-center">
+                            {/* Setting information only to undefined if user is actually changing into a different limit, otherwise 
+                            results in unnecessary updates in the DOM */}
                             <Slider className=" px-12 w-12"
                             marks={
                                 {3: <p>3</p>,
@@ -76,72 +124,98 @@ export default function TopArtists({accessToken}: {accessToken: string}){
                             }       
                             reverse={false}
                             vertical={false}
-                            onChangeComplete={(event) =>{setLimit(event as number); setInformation(undefined)}}
+                            onChangeComplete={(event) =>{if(event as Number != limit){setInformation(undefined)}; setLimit(event as number);}}
                             defaultValue={25}
                             max={35}
                             min={3} />
                         </div>
                     </div>
-                    <div className="flex justify-center w-full h-full">
-                        <div className = "flex flex-col justify-center align mx-24">
-                            <div className="flex flex-col h-[25rem] p-12 w-[45rem] border-4 border-black rounded-[5rem] justify-center">
-                                    <span className="text-6xl text-fontBlue text-center">
-                                        Artist Info
-                                    </span>
-                                <div className="text-center h-full w-full">
-                                        {information ? (
-                                        <div className="flex mt-4 justify-between align-middle">
-                                            <div className="self-center flex justify-center overflow-hidden w-48 h-48 rounded-2xl mx-6 flex-shrink-0">
-                                                <Link href={{pathname: information.page}}>
-                                                    <Image className = "w-48 h-48 object-cover overflow-hidden transition-all duration-300 " width={1000} height={1000} src={information.img} alt={"spotify page photo"}></Image>
-                                                </Link>
-                                            </div>
-                                            <div className="flex flex-col justify-self-end self-center justify-center">
-                                                <span className="text-5xl mb-12">
-                                                    {information.name}
-                                                </span>
-                                                <span className="text-2xl">
-                                                    Genre: {information.group}
-                                                </span>
-                                                <span className="text-2xl">
-                                                    Rank in this timeframe: {information.index + 1}/{limit}
-                                                </span>
-                                            </div>
-                                        </div>):
-                                            <div className="text-black text-2xl mt-24">
-                                                Click on an artist to see more information    
-                                            </div>}
-
+                    <div className="justify-center w-full 2xl:h-full h-fit 2xl:flex mt-4 2xl:mt-0">
+                        <div className = "flex flex-col justify-center align-center 2xl:ml-8">
+                            <div className="hidden 2xl:inline-block 2xl:flex-col min-h-fit h-[20rem] p-8 text-center min-w-full w-[40rem] border-4 border-black rounded-[5rem] justify-center">
+                            {view == "artist_view"? 
+                            <span className={"text-4xl text-fontBlue text-center font-semibold"}>
+                                Artist Info
+                            </span>
+                            :
+                            <span className={"text-4xl text-fontBlue text-center font-semibold"}>
+                                Track Info
+                            </span>
+                            }
+                            {information ? (
+                            <div className="flex mt-4 justify-between align-middle">
+                                <div className="self-center flex justify-center overflow-hidden w-40 h-40 rounded-2xl mx-6 flex-shrink-0">
+                                    <Link href={{pathname: information.page}}>
+                                        <Image className = "w-40 h-40 object-cover overflow-hidden transition-all duration-300 " width={1000} height={1000} src={information.img} alt={"spotify page photo"}></Image>
+                                    </Link>
                                 </div>
+                                <div className="flex flex-col justify-self-end self-center justify-center mt-4 w-full">
+                                    <span className="text-3xl mb-4">
+                                        {information.name}
+                                    </span>
+                                    {view == "artist_view"?
+                                        (
+                                        <span className="text-xl">
+                                            Genre: {information.group}
+                                        </span>
+                                        ):(
+                                        <span className="text-xl">
+                                            Artist: {information.artist}
+                                        </span>
+                                        )
+                                    }
+
+                                    <span className="text-xl">
+                                        Rank in this timeframe: {information.index + 1}/{limit}
+                                    </span>
+                                </div>
+                            </div>):
+                                <div className="text-black text-3xl mt-12">
+                                    Click on an artist to see more information    
+                                </div>}
+
                             </div>
-                            <div className="flex flex-col h-fit p-8 w-full border-4 border-black rounded-[5rem] my-12">
+                            <div className="flex flex-col h-fit p-4 w-full border-4 border-black rounded-[5rem] my-8">
                                 <div className="text-center h-fit ">
-                                    <span className="text-6xl text-fontBlue">
+                                    <span className="text-3xl text-fontBlue font-semibold">
                                         Adjust Timeframe
                                     </span>
-                                    <div className="flex mt-4 w-full justify-around text-3xl">
-                                        <button onClick={()=>{if(range != "short_term"){setInformation(undefined);} setRange("short_term");}}>
+                                    <div className="flex mt-4 w-full justify-around text-2xl">
+                                        {/* Setting information only to undefined if user is actually changing into a different time range, otherwise 
+                                        results in unnecessary updates in the DOM */}
+                                        <button className={"transition-all duration-300 "+textColour("short_term", range)}
+                                        onClick={()=>{if(range != "short_term"){setInformation(undefined);} setRange("short_term");}}>
                                             Short Term
                                         </button>
-                                        <button onClick={()=>{if(range != "medium_term"){setInformation(undefined);} setRange("medium_term");}}>
+                                        <button className={"transition-all duration-300 "+textColour("medium_term", range)}
+                                        onClick={()=>{if(range != "medium_term"){setInformation(undefined);} setRange("medium_term");}}>
                                             Medium Term
                                         </button>
-                                        <button onClick={()=>{if(range != "long_term"){setInformation(undefined);} setRange("long_term");}}>
+                                        <button className={"transition-all duration-300 "+textColour("long_term", range)}
+                                        onClick={()=>{if(range != "long_term"){setInformation(undefined);} setRange("long_term");}}>
                                             Long Term
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <div className="border-4 border-black rounded-[5rem] p-8">
+                            <div className="border-4 border-black rounded-[5rem] p-4">
                                 <div className="text-center h-fit">
-                                    <span className="text-6xl text-fontBlue">
+                                    <span className="text-3xl text-fontBlue font-semibold">
                                         View
                                     </span>
-                                    <div className="flex mt-4 w-full justify-around text-3xl">
-                                        <button onClick={()=>{if(view != "artist_view"){setInformation(undefined)} setView("artist_view")}}>
+                                    <div className="flex mt-4 w-full justify-around text-2xl">
+                                        {/* Setting information only to undefined if user is actually changing into a different view, otherwise 
+                                        results in unnecessary updates in the DOM */}
+                                        <button className={"transition-all duration-300 "+textColour("artist_view", view)}
+                                        onClick={()=>{
+                                        if(view != "artist_view"){setInformation(undefined)} 
+                                        setView("artist_view")}}>
                                             Artist View
                                         </button>
-                                        <button onClick={()=>{if(view != "track_view"){setInformation(undefined)}setView("track_view")}}>
+                                        <button className={"transition-all duration-300 "+textColour("track_view", view)}
+                                        onClick={()=>{
+                                            if(view != "track_view")
+                                            {setInformation(undefined)}setView("track_view")}}>
                                             Track View
                                         </button>
                                     </div>
