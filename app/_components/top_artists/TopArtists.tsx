@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { CirclePacking } from "../components/drawing circles/CirclePacking";
+import { CirclePacking } from "../drawing_circles/CirclePacking";
 import capitalizeFirstLetter from "./capitalization/Capitalization";
 
-import {RegularTrack, LocalTrack, Node} from "../components/drawing circles/data";
+import {RegularTrack, LocalTrack, Node} from "../../_types/data";
 import SpotifyWebApi from "spotify-web-api-node";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';

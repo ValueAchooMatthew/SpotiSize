@@ -2,7 +2,7 @@
 import * as d3 from "d3";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { drawCircles } from "./drawCircles";
-import { Node, RegularTrack, LocalTrack } from "./data";
+import { Node, RegularTrack, LocalTrack } from "@/app/_types/data";
 
 import { scaleSqrt, extent } from "d3";
 import { SubjectPosition } from "d3";

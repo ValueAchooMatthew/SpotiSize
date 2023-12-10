@@ -1,5 +1,5 @@
 import { scaleOrdinal, ScalePower } from "d3";
-import { Node } from "./data";
+import { Node } from "@/app/_types/data";
 
 export const drawCircles = (
   context: CanvasRenderingContext2D,
