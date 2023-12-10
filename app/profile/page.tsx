@@ -3,8 +3,8 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import Image from "next/image";
 import Link from "next/link";
 import TopArtists from "../_components/top_artists/TopArtists";
-import DisplayUsername from "../_components/displays/DisplayUsername";
-import DisplayPFP from "../_components/displays/DisplayPFP";
+import DisplayUsername from "../_components/top_artists/displays/DisplayUsername";
+import DisplayPFP from "../_components/top_artists/displays/DisplayPFP";
 
 export default async function Profile() {
 
