@@ -2,8 +2,8 @@
 import * as d3 from "d3";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { drawCircles } from "./drawCircles";
-import { Node } from "./data";
-import Info from "./data";
+import { Node, RegularTrack, LocalTrack } from "./data";
+
 import { scaleSqrt, extent } from "d3";
 import { SubjectPosition } from "d3";
 
@@ -14,7 +14,7 @@ type CirclePackingProps = {
   width: number;
   height: number;
   data: Node[];
-  setInformation: Dispatch<SetStateAction<Info | undefined>>
+  setInformation: Dispatch<SetStateAction<RegularTrack | LocalTrack | undefined>>
 };
 
 export const CirclePacking = ({ width, height, data, setInformation}: CirclePackingProps) => {
@@ -24,7 +24,9 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const nodes: Node[] = data.map((d) => {const picture = new Image(); 
-      picture.src = d.img; 
+      if(d.img){
+        picture.src = d.img; 
+      }
       return {imageElement: picture, ...d }});
       
     const [min, max] = extent(nodes.map((d) => d.value)) as [number, number];
@@ -80,11 +82,12 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
 
     d3.select<HTMLCanvasElement, Node>(context.canvas)
       .call(drag)
-    function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; name: string; group: string; img:string; index:number; page:string; artist:string}; }) {
+    function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; name: string; group: string; img:string; index:number; page:string; artist:string, islocal:boolean}; }) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
       setInformation({
+        is_local: event.subject.islocal, 
         name:event.subject.name,
         group:event.subject.group,
         img:event.subject.img,

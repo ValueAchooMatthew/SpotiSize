@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 import { CirclePacking } from "../components/drawing circles/CirclePacking";
 import capitalizeFirstLetter from "./capitalization/Capitalization";
 
-import { Node } from "../components/drawing circles/data";
-import Info from "../components/drawing circles/data";
+import {RegularTrack, LocalTrack, Node} from "../components/drawing circles/data";
 import SpotifyWebApi from "spotify-web-api-node";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -21,7 +20,7 @@ export default function TopArtists({accessToken}: {accessToken: string}){
     const [data, setData] = useState<Node[]>();
     const [range, setRange] = useState<"short_term" | "medium_term" | "long_term" | undefined>("medium_term");
     const [limit, setLimit] = useState<number>(25);
-    const [information, setInformation] = useState<Info | undefined>(undefined);
+    const [information, setInformation] = useState<RegularTrack | LocalTrack | undefined>(undefined);
     const [view, setView] = useState<"artist_view" | "track_view">("artist_view");
     useEffect(()=>{
         const retrieve = async () =>{
@@ -34,7 +33,7 @@ export default function TopArtists({accessToken}: {accessToken: string}){
                 topArtists.map((d, i)=>{
                   const src = d.images[0].url;
                   return {id: d.id, page: topArtists[i].uri, group: capitalizeFirstLetter(topArtists[i].genres[0]), 
-                    value:Math.exp(20*topArtists.length - .12*i), img: src, name: topArtists[i].name}
+                    value:Math.exp(20*topArtists.length - .12*i), img: src, name: topArtists[i].name, islocal: false}
                 })
                 setData(data);
             }else{
@@ -43,10 +42,21 @@ export default function TopArtists({accessToken}: {accessToken: string}){
                 // TODO: Address how to handle local hosted songs
                 const data: Node[]  =
                 topTracks.map((d, i)=>{
-                    return {id: d.id, page: topTracks[i].uri,
-                        value:Math.exp(20*topTracks.length - .12*i), img: topTracks[i].album.images[0].url, name: topTracks[i].name,
-                        artist:topTracks[i].artists[0].name}
-
+                    if(d.is_local){
+                        return (
+                            {
+                                islocal: true, value: Math.exp(20*topTracks.length - .12*i), name: d.name,
+                                img: undefined
+                            }
+                            
+                            )
+                    }else{
+                        return(
+                            {id: d.id, page: topTracks[i].uri,
+                                value:Math.exp(20*topTracks.length - .12*i), img: topTracks[i].album.images[0].url, name: topTracks[i].name,
+                                artist:topTracks[i].artists[0].name, islocal: false}
+                        )
+                    }
                 })
                 setData(data);
             }
@@ -69,28 +79,41 @@ export default function TopArtists({accessToken}: {accessToken: string}){
                             </span>
                             }
                             {information ? (
-                            <div className="flex mt-4 justify-between align-middle">
+                            <div className="flex justify-between align-middle">
                                 <div className="self-center flex justify-center overflow-hidden w-40 h-40 rounded-2xl mx-6 flex-shrink-0">
-                                    <Link href={{pathname: information.page}}>
-                                        <Image className = "w-40 h-40 object-cover overflow-hidden transition-all duration-300 " width={1000} height={1000} src={information.img} alt={"spotify page photo"}></Image>
+                                    {/* Displays spotify icon and reroutes to page if track is local*/}
+                                    <Link href={{pathname: information.is_local? "":information.page}}>
+                                        <Image className = "w-40 h-40 object-cover overflow-hidden transition-all duration-300 " width={1000} height={1000} src={information.is_local? "/img/Spotify_icon.svg":information.img} alt={"spotify page photo"}></Image>
                                     </Link>
                                 </div>
-                                <div className="flex flex-col justify-self-end self-center justify-center mt-4 w-full">
+                                <div className="flex flex-col self-center justify-center mt-4 w-full">
                                     <span className="text-3xl mb-4">
                                         {information.name}
                                     </span>
-                                    {view == "artist_view"?
+                                    {/* Checking if song/artist is local, if so displays information based on whether it is in track or artist view, 
+                                    otherwise, display nothing */}
+                                    {information.is_local?
+                                        <>
+                                        </>                         
+                                        :
+                                        view == "artist_view"?
                                         (
                                         <span className="text-xl">
                                             Genre: {information.group}
                                         </span>
                                         ):(
                                         <span className="text-xl">
-                                            Artist: {information.artist}
+                                            {
+                                                information.artist?
+                                                <>
+                                                Artist: {information.artist}</>:
+                                                <>
+                                                </>
+                                            }
                                         </span>
                                         )
+                                    
                                     }
-
                                     <span className="text-xl">
                                         Rank in this timeframe: {information.index + 1}/{limit}
                                     </span>
@@ -145,32 +168,45 @@ export default function TopArtists({accessToken}: {accessToken: string}){
                             {information ? (
                             <div className="flex mt-4 justify-between align-middle">
                                 <div className="self-center flex justify-center overflow-hidden w-40 h-40 rounded-2xl mx-6 flex-shrink-0">
-                                    <Link href={{pathname: information.page}}>
-                                        <Image className = "w-40 h-40 object-cover overflow-hidden transition-all duration-300 " width={1000} height={1000} src={information.img} alt={"spotify page photo"}></Image>
+                                    {/* Displays spotify icon and reroutes to page if track is local*/}
+                                    <Link href={{pathname: information.is_local? "":information.page}}>
+                                        <Image className = "w-40 h-40 object-cover overflow-hidden transition-all duration-300 " width={1000} height={1000} src={information.is_local? "/img/Spotify_icon.svg":information.img} alt={"spotify page photo"}></Image>
                                     </Link>
                                 </div>
-                                <div className="flex flex-col justify-self-end self-center justify-center mt-4 w-full">
+                                <div className="flex flex-col justify-self-end self-center justify-center  w-full">
                                     <span className="text-3xl mb-4">
                                         {information.name}
                                     </span>
-                                    {view == "artist_view"?
+                                    {/* Checking if song/artist is local, if so displays information based on whether it is in track or artist view, 
+                                    otherwise, display nothing */}
+                                    {information.is_local?
+                                        <>
+                                        </>                         
+                                        :
+                                        view == "artist_view"?
                                         (
                                         <span className="text-xl">
                                             Genre: {information.group}
                                         </span>
                                         ):(
                                         <span className="text-xl">
-                                            Artist: {information.artist}
+                                            {
+                                                information.artist?
+                                                <>
+                                                Artist: {information.artist}</>:
+                                                <>
+                                                </>
+                                            }
                                         </span>
                                         )
+                                    
                                     }
-
                                     <span className="text-xl">
                                         Rank in this timeframe: {information.index + 1}/{limit}
                                     </span>
                                 </div>
                             </div>):
-                                <div className="text-black text-3xl mt-12">
+                                <div className="text-black text-3xl mt-16">
                                     Click on an artist to see more information    
                                 </div>}
 

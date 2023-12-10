@@ -1,4 +1,3 @@
-import * as d3 from "d3";
 import { scaleOrdinal, ScalePower } from "d3";
 import { Node } from "./data";
 
@@ -14,13 +13,18 @@ export const drawCircles = (
   // const colorScale = scaleOrdinal<string>().domain(allGroups).range(COLORS);
 
   context.clearRect(0, 0, width, height);
-  const nevin = new Image();
-  nevin.src = "https://highprofiles.info/wp-content/uploads/2016/04/Yorke-main-900x600.jpg"
+
 
   // Draw the nodes
   nodes.forEach((node, i) => {
     if (!node.x || !node.y) {
       return;
+    }
+    const htmlImage = new Image();
+    if(node.img != undefined){
+      htmlImage.src = node.img;
+    }else{
+      htmlImage.src = "/img/Spotify_icon.svg";
     }
     context.save();
     context.beginPath();
@@ -33,7 +37,7 @@ export const drawCircles = (
     // context.fill();
     // const image = new Image();
     // image.src = node.img;
-    context.drawImage(node.imageElement ??nevin, node.x-sizeScale(node.value)/2-30, node.y-sizeScale(node.value)/2-30, sizeScale(node.value)+60, sizeScale(node.value)+60);
+    context.drawImage(htmlImage, node.x-sizeScale(node.value)/2-30, node.y-sizeScale(node.value)/2-30, sizeScale(node.value)+60, sizeScale(node.value)+60);
 
     context.restore();
 
