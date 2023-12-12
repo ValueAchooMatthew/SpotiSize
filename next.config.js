@@ -4,7 +4,7 @@ const nextConfig = {
         typedRoutes: true,
     },
     images : {
-        domains: ["i.scdn.co", "highprofiles.info"],
+        domains: ["i.scdn.co", "highprofiles.info","avatars.githubusercontent.com"],
     },
 }
 module.exports = nextConfig

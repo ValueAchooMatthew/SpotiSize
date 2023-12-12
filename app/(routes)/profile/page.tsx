@@ -20,7 +20,6 @@ export default async function Profile() {
             <Image className="w-full h-full" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
           </div>
           <Image className="absolute top-24 right-16 w-96 h-80 hidden xl:inline-block" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
-  
           <div className="box-content font-jost self-center 2xl:self-start flex mt-20 w-fit h-fit bg-gray-300 z-50 bg-opacity-60 rounded-[3rem] 2xl:px-12 px-6 2xl:py-8 py-4">
             <div>
               <div className="flex justify-between">

@@ -14,6 +14,8 @@ module.exports = {
       "xs": "480px",
       // => @media (min-width: 440px) { ... }
 
+      "medsmal": "560px",
+
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
 
@@ -22,6 +24,9 @@ module.exports = {
 
       'lg': '1024px',
       // => @media (min-width: 1024px) { ... }
+
+      "semilarge": "1200px",
+      // => @media (min-width: 1200px) { ... }
 
       'xl': '1280px',
       // => @media (min-width: 1280px) { ... }
