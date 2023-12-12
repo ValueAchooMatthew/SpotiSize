@@ -1,21 +1,17 @@
 'use client'
-import {getProviders, signIn} from "next-auth/react"
-
+import { signIn } from "next-auth/react"
 import Image from "next/image";
-import Link from "next/link";
 
 
-export default async function Home() {
-
-  const providers = await getProviders();
+export default function Home() {
 
 
   return (
-    <main className="relative h-fit pb-40 overflow">
-      <Image className="absolute -bottom-64 -left-64 " width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
+    <main className="relative min-h-screen h-full pb-40 overflow-hidden">
+      <Image className="absolute -left-64" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
       <Image className="absolute -top-64 -right-80" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
       {/* <Image className="absolute -top-56 right-0 w-[40rem] h-[40rem]" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image> */}
-      <Image className="absolute -top-24 right-32 w-80 h-80 z-10" width={1000} height={1000} src={"/img/saturn.svg"} alt="saturn image" ></Image>
+      <Image className="absolute top-24 right-64 w-80 h-80 z-10" width={1000} height={1000} src={"/img/saturn.svg"} alt="saturn image" ></Image>
       <Image className="absolute bottom-1/2 right-32 w-48 h-48 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
       <Image className="absolute bottom-32 right-64 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
       <Image className="absolute bottom-12 left-64 w-28 h-32 z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
@@ -39,13 +35,16 @@ export default async function Home() {
 
       </div>
 
-      <div className="mt-18" onClick={() => signIn(providers?.spotify.id, {callbackUrl: "/profile"})}>
+      <div className="mt-18" 
+      onClick={() => signIn("spotify", { callbackUrl: "/profile" })}
+      // onClick={(event)=>{console.log(event)}}
+      >
         <h4 className=" font-jost text-yellow italic text-center text-3xl">
           Discover your musical galaxy
         </h4>
 
         <div className="relative w-fit mx-auto hover:-translate-y-4 transition-all duration-300 will-change-transform">
-          <button  className="bg-[#9e8afe] px-12 py-8 text-center flex justify-center self-center 
+          <button className="bg-[#9e8afe] px-12 py-8 text-center flex justify-center self-center 
           rounded-full shadow-2xl mx-auto mt-8 z-10" >
             <span className="font-jost text-4xl text-white font-bold" >
               Log in With Spotify
