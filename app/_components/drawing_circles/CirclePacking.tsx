@@ -14,10 +14,11 @@ type CirclePackingProps = {
   width: number;
   height: number;
   data: Node[];
-  setInformation: Dispatch<SetStateAction<RegularTrack | LocalTrack | undefined>>
+  setInformation: Dispatch<SetStateAction<RegularTrack | LocalTrack | undefined>>,
+  bubbleSize: number;
 };
 
-export const CirclePacking = ({ width, height, data, setInformation}: CirclePackingProps) => {
+export const CirclePacking = ({ width, height, data, setInformation, bubbleSize}: CirclePackingProps) => {
   // The force simulation mutates nodes, so create a copy first
   // Node positions are initialized by d3
 
@@ -49,7 +50,7 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
       // list of forces we apply to get node positions
       .force(
         "collide",
-        d3.forceCollide<Node>().radius((node) => sizeScale(node.value)/2 +30)
+        d3.forceCollide<Node>().radius((node) => sizeScale(node.value)/2 +bubbleSize)
       )
         .force("charge", d3.forceManyBody().strength(.002))
         .force("center", d3.forceCenter(width / 2, height / 2))
@@ -60,7 +61,7 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
 
       // at each iteration of the simulation, draw the network diagram with the new node positions
       .on("tick", () => {
-        drawCircles(context, width, height, nodes, sizeScale);
+        drawCircles(context, width, height, nodes, sizeScale, bubbleSize);
       });
 
 
@@ -114,9 +115,7 @@ export const CirclePacking = ({ width, height, data, setInformation}: CirclePack
     }
 
 
-  }, [width, height, data, setInformation]);
-
-
+  }, [width, height, data, setInformation, bubbleSize]);
 
   return (
       <canvas className="z-50 rounded-full border-4 border-black" 

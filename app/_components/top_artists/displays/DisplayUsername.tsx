@@ -9,7 +9,7 @@ export default async function DisplayUsername({accessToken}: {accessToken: strin
     
     return(
         
-        <p>
+        <p className="">
             {user.body.display_name}'s
         </p>
 

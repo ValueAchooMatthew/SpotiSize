@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Card from "../_components/card/card";
+import Card from "../../_components/card/card";
 export default function Contact() {
   return (
 

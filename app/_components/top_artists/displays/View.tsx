@@ -13,19 +13,19 @@ export default function View({view, setView, setInformation}:
 
     return(
         <div className="text-center h-fit">
-            <span className="text-3xl text-fontBlue font-semibold">
+            <span className="md:text-3xl text-2xl text-fontBlue font-semibold">
                 View
             </span>
-            <div className="flex mt-4 w-full justify-around text-2xl">
+            <div className="flex flex-col 2xl:flex-row md:mt-4 mt-2 w-full justify-around md:text-2xl text-base">
                 {/* Setting information only to undefined if user is actually changing into a different view, otherwise 
                 results in unnecessary updates in the DOM */}
-                <button className={"transition-all duration-300 "+textColouring("artist_view", view)}
+                <button className={"transition-all duration-300 py-0.5 "+textColouring("artist_view", view)}
                 onClick={()=>{
                 if(view != "artist_view"){setInformation(undefined)} 
                 setView("artist_view")}}>
                     Artist View
                 </button>
-                <button className={"transition-all duration-300 "+textColouring("track_view", view)}
+                <button className={"transition-all duration-300 py-0.5 "+textColouring("track_view", view)}
                 onClick={()=>{
                     if(view != "track_view")
                     {setInformation(undefined)}setView("track_view")}}>
