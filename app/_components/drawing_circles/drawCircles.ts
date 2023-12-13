@@ -1,9 +1,6 @@
 import { scaleOrdinal, ScalePower } from "d3";
 import { Node } from "@/app/_types/data";
 
-const imageFallback = new Image();
-imageFallback.src = "/img/Spotify_icon.svg";
-
 export const drawCircles = (
   context: CanvasRenderingContext2D,
   width: number,
@@ -17,6 +14,8 @@ export const drawCircles = (
   // const colorScale = scaleOrdinal<string>().domain(allGroups).range(COLORS);
 
   context.clearRect(0, 0, width, height);
+  const imageFallback = new Image();
+  imageFallback.src = "/img/Spotify_icon.svg";
 
   // Draw the nodes
   nodes.forEach((node, i) => {

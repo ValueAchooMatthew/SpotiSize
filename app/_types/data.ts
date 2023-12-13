@@ -1,6 +1,11 @@
-import * as d3 from "d3";
+import type { SimulationNodeDatum } from "d3";
 
-export interface Node extends d3.SimulationNodeDatum {
+/* SIMULATION TYPES */
+
+/**
+ * In-between interface for Spotify data to be used in simulation
+ */
+export interface Node extends SimulationNodeDatum {
   islocal?: boolean;
   id?: string;
   group?: string;
@@ -10,6 +15,8 @@ export interface Node extends d3.SimulationNodeDatum {
   name: string;
   artist?: string;
 }
+
+/* SPOTIFY CONVENIENCE TYPES */
 
 export interface RegularTrack {
   is_local: false;
@@ -26,3 +33,7 @@ export interface LocalTrack {
   name: string;
   index: number;
 }
+
+export type TimeFrame = "short_term" | "medium_term" | "long_term";
+
+export type TopItemsVariant = "artist_view" | "track_view";
