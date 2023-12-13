@@ -21,12 +21,11 @@ export default function ArtistInfo({ view, information, limit }: { view: "artist
                     <div className="self-center flex justify-center overflow-hidden md:w-40 md:h-40 w-24 h-24 rounded-2xl mx-6 flex-shrink-0">
                         {/* Displays spotify icon and reroutes to page if track is local*/}
                         <Link href={{ pathname: information.is_local ? "" : information.page }}>
-                            <div className="md:w-40 md:h-40 w-24 h-24 object-cover overflow-hidden transition-all duration-300 relative">
-                                <Image priority fill
-                                    src={information.is_local ? "/img/Spotify_icon.svg" : information.img}
-                                    alt={"spotify page photo"}
-                                />
-                            </div>
+                            {/* Spotify image API wont mind some unoptimized images */}
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img className="md:w-40 md:h-40 w-24 h-24 object-cover overflow-hidden transition-all duration-300"
+                                src={information.is_local ? "/img/Spotify_icon.svg" : information.img}
+                                alt={"spotify page photo"} />
                         </Link>
                     </div>
                     <div className="flex flex-col self-center justify-center w-full">
