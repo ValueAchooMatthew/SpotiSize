@@ -1,5 +1,5 @@
-'use client'
-import { signIn } from "next-auth/react"
+"use client";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 
 
@@ -35,9 +35,8 @@ export default function Home() {
 
       </div>
 
-      <div className="mt-18" 
-      onClick={() => signIn("spotify", { callbackUrl: "/profile" })}
-      // onClick={(event)=>{console.log(event)}}
+      <div className="mt-18"
+        onClick={() => signIn("spotify", { callbackUrl: "/profile" })}
       >
         <h4 className=" font-jost text-yellow italic text-center md:text-3xl text-2xl">
           Discover your musical galaxy

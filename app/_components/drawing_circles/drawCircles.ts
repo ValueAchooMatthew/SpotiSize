@@ -1,4 +1,4 @@
-import { scaleOrdinal, ScalePower } from "d3";
+import { ScalePower } from "d3";
 import { Node } from "@/app/_types/data";
 
 export const drawCircles = (
@@ -9,16 +9,12 @@ export const drawCircles = (
   sizeScale: ScalePower<number, number, never>,
   bubble_size: number,
 ) => {
-  // Color Scale
-  const allGroups = [...new Set(nodes.map((d) => d.group))];
-  // const colorScale = scaleOrdinal<string>().domain(allGroups).range(COLORS);
-
   context.clearRect(0, 0, width, height);
   const imageFallback = new Image();
   imageFallback.src = "/img/Spotify_icon.svg";
 
   // Draw the nodes
-  nodes.forEach((node, i) => {
+  nodes.forEach((node) => {
     if (!node.x || !node.y) {
       return;
     }

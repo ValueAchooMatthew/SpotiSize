@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import * as d3 from "d3";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { drawCircles } from "./drawCircles";
@@ -40,7 +40,7 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
     // run d3-force to find the position of nodes on the canvas
     //TODO: .alpha
     const simulation = d3.forceSimulation<Node>(nodes)
-      // .alphaDecay(.01)
+
 
 
       // list of forces we apply to get node positions
@@ -61,7 +61,7 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
       });
 
 
-    const drag = d3.drag<HTMLCanvasElement, Node>().subject((event, d: Node) => {
+    const drag = d3.drag<HTMLCanvasElement, Node>().subject((event) => {
       const [px, py] = d3.pointer(event, context.canvas);
       const least = d3.least(nodes, (node) => {
 
@@ -71,14 +71,14 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
         return 1;
       });
       const fallback: SubjectPosition = { x: 0, y: 0 };
-      if (least) { return least } else { return fallback };
+      if (least) { return least; } return fallback;
     }).on("start", dragstarted)
       .on("drag", dragged)
       .on("end", dragended);
 
 
     d3.select<HTMLCanvasElement, Node>(context.canvas)
-      .call(drag)
+      .call(drag);
     function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; name: string; group: string; img: HTMLImageElement; index: number; page: string; artist: string, islocal: boolean }; }) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       event.subject.fx = event.subject.x;
@@ -91,7 +91,7 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
         index: event.subject.index,
         page: event.subject.page,
         artist: event.subject.artist
-      })
+      });
     }
 
     //TODO: Fix any because maxim says 

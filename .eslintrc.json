@@ -1,3 +1,19 @@
 {
-  "extends": "next/core-web-vitals"
+  "plugins": [
+    "@stylistic/ts"
+  ],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended"
+  ],
+  "rules": {
+    "@stylistic/ts/indent": [
+      "error",
+      2
+    ],
+    "@stylistic/ts/quotes": [
+      2,
+      "double"
+    ]
+  }
 }

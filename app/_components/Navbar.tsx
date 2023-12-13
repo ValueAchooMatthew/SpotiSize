@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const route = usePathname();
-  const tabs = `transition sm:ml-10 m-4 hover:text-purple sm:text-3xl xs:text-xl text-lg font-medium`;
+  const tabs = "transition sm:ml-10 m-4 hover:text-purple sm:text-3xl xs:text-xl text-lg font-medium";
 
   return (
     // consider changing from fixed

@@ -13,9 +13,9 @@ export default function Contact() {
       <Image className="absolute hidden semilarge:inline-block bottom-24 w-96 h-80 rotate-180" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
       {/* Maybe insert more background images */}
       <div className="flex justify-center">
-          <h1 className="text-center sm:text-7xl text-6xl font-bold text-fontBlue my-20 font-jost">
+        <h1 className="text-center sm:text-7xl text-6xl font-bold text-fontBlue my-20 font-jost">
             Contact Us
-          </h1>
+        </h1>
       </div>
 
       <div className="flex justify-center">
@@ -31,8 +31,8 @@ export default function Contact() {
       </div>
       <div className="flex justify-center">
 
-          <Card url="https://avatars.githubusercontent.com/u/64499892?v=4" name="Nevin" link={"https://github.com/nevinds"}></Card>
-          <Card url="https://avatars.githubusercontent.com/u/86172867?v=4" name="Aaryan" link={"https://github.com/patel-aaryan"}></Card>
+        <Card url="https://avatars.githubusercontent.com/u/64499892?v=4" name="Nevin" link={"https://github.com/nevinds"}></Card>
+        <Card url="https://avatars.githubusercontent.com/u/86172867?v=4" name="Aaryan" link={"https://github.com/patel-aaryan"}></Card>
 
       </div>
 

@@ -1,5 +1,6 @@
 import { Node } from "../_types/data";
 import { toTitleCase } from "./caseConverters";
+import type SpotifyApi from "spotify-web-api-node";
 
 /**
  * Converts spotify top artist list to a list of Nodes compatible with d3 simulation
@@ -53,21 +54,20 @@ export function tracksToNodes(
         name: trackObject.name,
         img: undefined,
       };
-    } else {
-      const image = new Image();
-
-      const src = tracks[idx].album.images[0].url;
-      image.src = src;
-
-      return {
-        id: trackObject.id,
-        page: tracks[idx].uri,
-        value: Math.exp(20 * tracks.length - .12 * idx),
-        img: image,
-        name: tracks[idx].name,
-        artist: tracks[idx].artists[0].name,
-        islocal: false,
-      };
     }
+    const image = new Image();
+
+    const src = tracks[idx].album.images[0].url;
+    image.src = src;
+
+    return {
+      id: trackObject.id,
+      page: tracks[idx].uri,
+      value: Math.exp(20 * tracks.length - .12 * idx),
+      img: image,
+      name: tracks[idx].name,
+      artist: tracks[idx].artists[0].name,
+      islocal: false,
+    };
   });
 }

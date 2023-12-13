@@ -57,7 +57,7 @@ const authOptions: NextAuthOptions = {
       return session;
     },
 
-    async jwt({ user, account, token }) {
+    async jwt({ account, token }) {
       if (account) {
         // Initital sign on, use newly generated JWT
 
@@ -78,9 +78,8 @@ const authOptions: NextAuthOptions = {
         token.accessTokenExpires && Date.now() < token.accessTokenExpires
       ) {
         return token;
-      } else {
-        return await refreshToken(token);
       }
+      return await refreshToken(token);
     },
   },
 };

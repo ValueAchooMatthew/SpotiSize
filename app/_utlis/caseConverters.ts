@@ -15,7 +15,7 @@ export function toTitleCase(phrase: string): string {
       }
     }
     return word.join("");
-  } else {
-    return ("No Listed Genre");
-  }
+  } 
+  return ("No Listed Genre");
+  
 }
