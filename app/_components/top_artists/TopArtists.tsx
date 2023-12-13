@@ -84,11 +84,19 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
                 const response = await api.getMyTopArtists({ limit: limit, time_range: range });
                 const topArtists = response.body.items;
                 const data: Node[] =
-                    topArtists.map((d, i) => {
-                        const src = d.images[0].url;
+                    topArtists.map((artistObject, idx) => {
+                        const image = new Image()
+
+                        const src = artistObject.images[0].url;
+                        image.src = src;
                         return {
-                            id: d.id, page: topArtists[i].uri, group: capitalizeFirstLetter(topArtists[i].genres[0]),
-                            value: Math.exp(20 * topArtists.length - .12 * i), img: src, name: topArtists[i].name, islocal: false
+                            id: artistObject.id,
+                            page: topArtists[idx].uri,
+                            group: capitalizeFirstLetter(topArtists[idx].genres[0]),
+                            value: Math.exp(20 * topArtists.length - .12 * idx),
+                            img: image,
+                            name: topArtists[idx].name,
+                            islocal: false
                         }
                     })
                 return data
@@ -96,17 +104,30 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
                 const response = await api.getMyTopTracks({ limit: limit, time_range: range });
                 const topTracks = response.body.items;
                 const data: Node[] =
-                    topTracks.map((d, i) => {
-                        if (d.is_local) {
-                            return ({ islocal: true, value: Math.exp(20 * topTracks.length - .12 * i), name: d.name, img: undefined })
+                    topTracks.map((trackObject, idx) => {
+                        if (trackObject.is_local) {
+                            return {
+                                islocal: true,
+                                value: Math.exp(20 * topTracks.length - .12 * idx),
+                                name: trackObject.name,
+                                img: undefined
+                            }
                         } else {
-                            return (
-                                {
-                                    id: d.id, page: topTracks[i].uri,
-                                    value: Math.exp(20 * topTracks.length - .12 * i), img: topTracks[i].album.images[0].url, name: topTracks[i].name,
-                                    artist: topTracks[i].artists[0].name, islocal: false
-                                }
-                            )
+                            const image = new Image()
+
+                            const src = topTracks[idx].album.images[0].url;
+                            image.src = src;
+
+                            return {
+                                id: trackObject.id,
+                                page: topTracks[idx].uri,
+                                value: Math.exp(20 * topTracks.length - .12 * idx),
+                                img: image,
+                                name: topTracks[idx].name,
+                                artist: topTracks[idx].artists[0].name,
+                                islocal: false
+                            }
+
                         }
                     })
                 return data
