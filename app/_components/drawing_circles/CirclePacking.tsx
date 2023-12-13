@@ -79,7 +79,7 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
 
     d3.select<HTMLCanvasElement, Node>(context.canvas)
       .call(drag)
-    function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; name: string; group: string; img: string; index: number; page: string; artist: string, islocal: boolean }; }) {
+    function dragstarted(event: { active: any; subject: { fx: any; x: any; fy: any; y: any; name: string; group: string; img: HTMLImageElement; index: number; page: string; artist: string, islocal: boolean }; }) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;

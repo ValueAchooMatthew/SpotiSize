@@ -5,12 +5,12 @@ import { CirclePacking } from "../drawing_circles/CirclePacking";
 import ArtistInfo from "./displays/ArtistInfo";
 import Timeframe from "./displays/TimeFrame";
 import View from "./displays/View";
-import capitalizeFirstLetter from "./capitalization/Capitalization";
 
 import { RegularTrack, LocalTrack, Node } from "../../_types/data";
 import SpotifyWebApi from "spotify-web-api-node";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { artistsToNodes, tracksToNodes } from "@/app/_utlis/nodeConverters";
 
 
 
@@ -22,7 +22,6 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
     const [view, setView] = useState<"artist_view" | "track_view">("artist_view");
     const [bubbleSize, setBubbleSize] = useState<number>(30)
     const [dimensions, setDimensions] = useState<number>(650)
-    const [max, setMax] = useState<number>(35)
 
     // Helper function
     const fitScreen = (width: number, setBubbleSize: Dispatch<SetStateAction<number>>, setDimensions: Dispatch<SetStateAction<number>>) => {
@@ -83,54 +82,11 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
             if (view == "artist_view") {
                 const response = await api.getMyTopArtists({ limit: limit, time_range: range });
                 const topArtists = response.body.items;
-                const data: Node[] =
-                    topArtists.map((artistObject, idx) => {
-                        const image = new Image()
-
-                        const src = artistObject.images[0].url;
-                        image.src = src;
-                        return {
-                            id: artistObject.id,
-                            page: topArtists[idx].uri,
-                            group: capitalizeFirstLetter(topArtists[idx].genres[0]),
-                            value: Math.exp(20 * topArtists.length - .12 * idx),
-                            img: image,
-                            name: topArtists[idx].name,
-                            islocal: false
-                        }
-                    })
-                return data
+                return artistsToNodes(topArtists);
             } else {
                 const response = await api.getMyTopTracks({ limit: limit, time_range: range });
                 const topTracks = response.body.items;
-                const data: Node[] =
-                    topTracks.map((trackObject, idx) => {
-                        if (trackObject.is_local) {
-                            return {
-                                islocal: true,
-                                value: Math.exp(20 * topTracks.length - .12 * idx),
-                                name: trackObject.name,
-                                img: undefined
-                            }
-                        } else {
-                            const image = new Image()
-
-                            const src = topTracks[idx].album.images[0].url;
-                            image.src = src;
-
-                            return {
-                                id: trackObject.id,
-                                page: topTracks[idx].uri,
-                                value: Math.exp(20 * topTracks.length - .12 * idx),
-                                img: image,
-                                name: topTracks[idx].name,
-                                artist: topTracks[idx].artists[0].name,
-                                islocal: false
-                            }
-
-                        }
-                    })
-                return data
+                return tracksToNodes(topTracks);
             }
         }
         retrieve().then(setData).catch(console.log);
@@ -168,7 +124,7 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
                                 vertical={false}
                                 onChangeComplete={(event) => { if (event as Number != limit) { setInformation(undefined) }; setLimit(event as number); }}
                                 defaultValue={25}
-                                max={max}
+                                max={35}
                                 min={3} />
                         </div>
                     </div>

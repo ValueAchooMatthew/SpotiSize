@@ -24,8 +24,9 @@ export default function ArtistInfo({ view, information, limit }: { view: "artist
                             {/* Spotify image API wont mind some unoptimized images */}
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img className="md:w-40 md:h-40 w-24 h-24 object-cover overflow-hidden transition-all duration-300"
-                                src={information.is_local ? "/img/Spotify_icon.svg" : information.img}
+                                src={information.is_local ? "/img/Spotify_icon.svg" : information.img.src}
                                 alt={"spotify page photo"} />
+                            {/* TODO: It's still refetching this way, we can make it not do that */}
                         </Link>
                     </div>
                     <div className="flex flex-col self-center justify-center w-full">

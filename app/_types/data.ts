@@ -15,7 +15,7 @@ export interface RegularTrack {
   is_local: false;
   name: string;
   group?: string;
-  img: string;
+  img: HTMLImageElement;
   index: number;
   page: string;
   artist?: string;
