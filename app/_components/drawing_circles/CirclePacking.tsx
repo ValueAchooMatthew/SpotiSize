@@ -118,7 +118,7 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize}
   }, [width, height, data, setInformation, bubbleSize]);
 
   return (
-      <canvas className="z-50 rounded-full border-4 border-black" 
+      <canvas className="z-50 xs:rounded-[5rem] rounded-[3rem]" 
         ref={canvasRef}
         style={{
           width,

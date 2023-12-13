@@ -38,7 +38,7 @@ export default function TopArtists({accessToken}: {accessToken: string}){
             setDimensions(400);
         }else{
             setBubbleSize(12);
-            setDimensions(300);
+            setDimensions(350);
         }
     }
 
@@ -57,7 +57,7 @@ export default function TopArtists({accessToken}: {accessToken: string}){
             setDimensions(400);
         }else{
             setBubbleSize(14);
-            setDimensions(300);
+            setDimensions(350);
         }
 
         const handleResize = (event: Event)=>{
@@ -118,7 +118,7 @@ export default function TopArtists({accessToken}: {accessToken: string}){
                     <div className="flex flex-col max-h-fit py-6 xs:p-8 text-center min-w-full md:w-[40rem] w-[20rem] border-4 border-black xs:rounded-[5rem] rounded-[3rem] justify-center mb-8 2xl:hidden">
                         <ArtistInfo information={information} limit={limit} view={view}/>
                     </div>
-                    <div className="mb-0 flex flex-col justify-center align-middle 2xl:p-12 md:p-4 xs:p-1.5 p-0.5 border-4 border-black xs:rounded-[5rem] rounded-[3rem] bg-gradient-to-b from-[#11005e] to-[#080135b7]">
+                    <div className="mb-0 flex flex-col justify-center align-middle pb-12 border-4 border-black xs:rounded-[5rem] rounded-[3rem] bg-gradient-to-b from-[#11005e] to-[#080135b7]">
                         <div className="flex justify-center">
                             <CirclePacking width={dimensions} height={dimensions} data = {data} setInformation={setInformation} bubbleSize = {bubbleSize}></CirclePacking>
                         </div>
