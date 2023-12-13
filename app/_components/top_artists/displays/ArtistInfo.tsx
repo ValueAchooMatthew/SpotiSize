@@ -24,8 +24,8 @@ export default function ArtistInfo({ view, information, limit }: { view: "artist
                             <div className="md:w-40 md:h-40 w-24 h-24 object-cover overflow-hidden transition-all duration-300 relative">
                                 <Image priority fill
                                     src={information.is_local ? "/img/Spotify_icon.svg" : information.img}
-                                    alt={"spotify page photo"}>
-                                </Image>
+                                    alt={"spotify page photo"}
+                                />
                             </div>
                         </Link>
                     </div>
