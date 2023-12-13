@@ -45,6 +45,9 @@ const authOptions: NextAuthOptions = {
     authorization: auth_url,
   })],
   secret: process.env.JWT_SECRET,
+  pages: {
+    signIn: "/",
+  },
   callbacks: {
     session({ session, token }) {
       session.user.accessToken = token.accessToken;
