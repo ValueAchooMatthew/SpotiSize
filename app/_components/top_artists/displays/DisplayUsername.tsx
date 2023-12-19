@@ -11,7 +11,7 @@ export default async function DisplayUsername({ accessToken }: { accessToken: st
     <p className="">
       {user.body.display_name + "'s"}
     </p>
-
+    
   );
 
 }
