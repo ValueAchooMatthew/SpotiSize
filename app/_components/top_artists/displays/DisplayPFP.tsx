@@ -22,7 +22,7 @@ export default async function DisplayUsername({accessToken}: {accessToken: strin
   return(
     // Fix later
     <p>
-                :P
+      :P
     </p>
   );
     
