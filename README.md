@@ -7,9 +7,9 @@ Spotisize is a project dedicated to visualizing the music that makes your world,
 favourite artists and songs come to life as interactive bubbles scaled based on your listening trends. We are excited to add a lot of additional features
 before our complete launch so stay tuned!
 
-![alt text](https://github.com/valueachoomatthew/spotisize/blob/main/Demo1.PNG?raw=true)
-![alt text](https://github.com/valueachoomatthew/spotisize/blob/main/Demo2.PNG?raw=true)
-![alt text](https://github.com/valueachoomatthew/spotisize/blob/main/Demo3.PNG?raw=true)
+![alt text](https://github.com/ValueAchooMatthew/SpotiSize/blob/main/public/Demo1.PNG)
+![alt text](https://github.com/ValueAchooMatthew/SpotiSize/blob/main/public/Demo2.PNG)
+![alt text](https://github.com/ValueAchooMatthew/SpotiSize/blob/main/public/Demo3.PNG)
 
 
 ### Current next steps
