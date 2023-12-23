@@ -6,6 +6,7 @@ import { Node, RegularTrack, LocalTrack } from "@/app/_types/data";
 
 import { scaleSqrt, extent } from "d3";
 import { SubjectPosition } from "d3";
+import { tryGetCoordsFromEvent } from "@/app/_utlis/eventParsers";
 
 const BUBBLE_MIN_SIZE = 4;
 const BUBBLE_MAX_SIZE = 80;
@@ -62,16 +63,20 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
 
 
     const drag = d3.drag<HTMLCanvasElement, Node>().subject((event) => {
-      const [px, py] = d3.pointer(event, context.canvas);
-      const least = d3.least(nodes, (node) => {
-
-        if (node.x != undefined && node.y != undefined) {
-          return Math.sqrt((px - (node.x)) ** 2 + (py - (node.y)) ** 2);
-        }
-        return 1;
-      });
+      console.log(event);
+      const coords = tryGetCoordsFromEvent(event);
+      let least: Node | undefined = undefined;
+      if (coords) {
+        least = d3.least(nodes, (node) => {
+          if (node.x && node.y) {
+            const distance = Math.sqrt((coords.x - (node.x)) ** 2 + (coords.y - (node.y)) ** 2);
+            return distance;
+          }
+          return 1;
+        });
+      }
       const fallback: SubjectPosition = { x: 0, y: 0 };
-      if (least) { return least; } return fallback;
+      return least ?? fallback;
     }).on("start", dragstarted)
       .on("drag", dragged)
       .on("end", dragended);
