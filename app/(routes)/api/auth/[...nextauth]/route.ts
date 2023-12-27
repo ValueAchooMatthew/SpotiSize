@@ -34,7 +34,8 @@ async function refreshToken(token: JWT): Promise<JWT> {
   } catch (error) {
     return {
       ...token,
-      error: error as string,
+      error:
+        `Error occured when trying to refresh the token ${(error as string)}`,
     };
   }
 }
@@ -79,7 +80,7 @@ const authOptions: NextAuthOptions = {
       ) {
         return token;
       }
-      return await refreshToken(token);
+      return refreshToken(token);
     },
   },
 };
