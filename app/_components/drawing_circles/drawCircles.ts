@@ -18,7 +18,8 @@ export const drawCircles = (
     if (!node.x || !node.y) {
       return;
     }
-
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = "high";
     context.save();
     context.beginPath();
     // context.moveTo(node.x + 1000000, node.y);
