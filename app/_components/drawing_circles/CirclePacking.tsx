@@ -1,6 +1,6 @@
 "use client";
 import * as d3 from "d3";
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, RefObject, SetStateAction, useEffect } from "react";
 import { drawCircles } from "./drawCircles";
 import { Node, RegularTrack, LocalTrack } from "@/app/_types/data";
 
@@ -15,17 +15,33 @@ type CirclePackingProps = {
   width: number;
   height: number;
   data: Node[];
+  canvasRef: RefObject<HTMLCanvasElement>
   setInformation: Dispatch<SetStateAction<RegularTrack | LocalTrack | undefined>>,
   bubbleSize: number;
 };
 
-export const CirclePacking = ({ width, height, data, setInformation, bubbleSize }: CirclePackingProps) => {
+export const CirclePacking = ({ width, height, data, setInformation, bubbleSize, canvasRef }: CirclePackingProps) => {
   // The force simulation mutates nodes, so create a copy first
   // Node positions are initialized by d3
+  
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const nodes: Node[] = data;
+    // console.log(nodes[1].img, nodes[1].img)
+    // nodes.forEach((node)=>{
+    //   if(node.img){
+    //     if(node.img.width > node.img.height){
+    //       const amount_to_add = Math.floor((node.img.width - node.img.height)/2)
+    //       node.img.style.borderTop = `${amount_to_add}px solid white`
+    //       node.img.style.borderBottom = `${amount_to_add}px solid white`
+    //     }else{
+    //       const amount_to_add = Math.floor((node.img.height - node.img.width)/2)
+    //       node.img.style.borderRight = `${amount_to_add}px solid white`
+    //     }
+    //   }
+
+    // })
+    
 
     const [min, max] = extent(nodes.map((d) => d.value)) as [number, number];
     const sizeScale = scaleSqrt()
@@ -38,12 +54,11 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
     if (!context) {
       return;
     }
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = "high";
     // run d3-force to find the position of nodes on the canvas
     //TODO: .alpha
     const simulation = d3.forceSimulation<Node>(nodes)
-
-
-
       // list of forces we apply to get node positions
       .force(
         "collide",
@@ -63,7 +78,6 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
 
 
     const drag = d3.drag<HTMLCanvasElement, Node>().subject((event) => {
-      console.log(event);
       const coords = tryGetCoordsFromEvent(event);
       let least: Node | undefined = undefined;
       if (coords) {
@@ -116,10 +130,10 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
     }
 
 
-  }, [width, height, data, setInformation, bubbleSize]);
+  }, [width, height, data, setInformation, bubbleSize, canvasRef]);
 
   return (
-    <canvas className="z-50 xs:rounded-[5rem] rounded-[3rem]"
+    <canvas className="z-50 xs:rounded-[5rem] rounded-[3rem] w-full h-full"
       ref={canvasRef}
       style={{
         width,
@@ -130,5 +144,3 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize 
     />
   );
 };
-
-

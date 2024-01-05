@@ -15,7 +15,6 @@ export function artistsToNodes(
 
     const src = artistObject.images[0].url;
     image.src = src;
-
     // We want to account for the fact that Spotify API can
     // randomly return empty arr while also accounting for
     // the fact Spotify doesn't title case
