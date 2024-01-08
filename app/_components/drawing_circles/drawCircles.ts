@@ -39,7 +39,6 @@ export const drawCircles = (
       // Calculate the scaling factors for the image
       const scaleWidth = bubbleDiameter / node.img.width;
       const scaleHeight = bubbleDiameter / node.img.height;
-      console.log(scaleWidth, scaleHeight);
       const scale = Math.max(scaleWidth, scaleHeight);
   
       // Calculate the new width and height of the image after scaling
@@ -61,7 +60,7 @@ export const drawCircles = (
         newWidth,
         newHeight
       );
-  
+        
       context.restore();
     }
   

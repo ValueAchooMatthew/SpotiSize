@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { LocalTrack, RegularTrack } from "@/app/_types/data";
 
-export default function ArtistInfo({ view, information, limit }: { view: "artist_view" | "track_view", information: RegularTrack | LocalTrack | undefined, limit: number }) {
+export default function DisplayInfo({ view, information, limit }: { view: "artist_view" | "track_view", information: RegularTrack | LocalTrack | undefined, limit: number }) {
 
   return (
     <>

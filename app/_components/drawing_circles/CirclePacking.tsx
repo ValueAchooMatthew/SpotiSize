@@ -1,6 +1,6 @@
 "use client";
 import * as d3 from "d3";
-import { Dispatch, RefObject, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { drawCircles } from "./drawCircles";
 import { Node, RegularTrack, LocalTrack } from "@/app/_types/data";
 
@@ -15,33 +15,17 @@ type CirclePackingProps = {
   width: number;
   height: number;
   data: Node[];
-  canvasRef: RefObject<HTMLCanvasElement>
   setInformation: Dispatch<SetStateAction<RegularTrack | LocalTrack | undefined>>,
   bubbleSize: number;
 };
 
-export const CirclePacking = ({ width, height, data, setInformation, bubbleSize, canvasRef }: CirclePackingProps) => {
-  // The force simulation mutates nodes, so create a copy first
-  // Node positions are initialized by d3
-  
+export const CirclePacking = ({ width, height, data, setInformation, bubbleSize}: CirclePackingProps) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+  // The force simulation mutates nodes, so create a copy first
+  // Node positions are initialized by d3
     const nodes: Node[] = data;
-    // console.log(nodes[1].img, nodes[1].img)
-    // nodes.forEach((node)=>{
-    //   if(node.img){
-    //     if(node.img.width > node.img.height){
-    //       const amount_to_add = Math.floor((node.img.width - node.img.height)/2)
-    //       node.img.style.borderTop = `${amount_to_add}px solid white`
-    //       node.img.style.borderBottom = `${amount_to_add}px solid white`
-    //     }else{
-    //       const amount_to_add = Math.floor((node.img.height - node.img.width)/2)
-    //       node.img.style.borderRight = `${amount_to_add}px solid white`
-    //     }
-    //   }
-
-    // })
-    
 
     const [min, max] = extent(nodes.map((d) => d.value)) as [number, number];
     const sizeScale = scaleSqrt()

@@ -1,4 +1,4 @@
-import type { SimulationNodeDatum } from "d3";
+import type { SimulationLinkDatum, SimulationNodeDatum } from "d3";
 
 /* SIMULATION TYPES */
 
@@ -14,6 +14,18 @@ export interface Node extends SimulationNodeDatum {
   img?: HTMLImageElement;
   name: string;
   artist?: string;
+}
+
+export interface StarNodes extends SimulationNodeDatum{
+  id: string;
+  default: {x: number, y: number}
+  size: number
+  
+}
+
+export interface StarLinks extends SimulationLinkDatum<StarNodes>{
+  source: string;
+  target: string;
 }
 
 /* SPOTIFY CONVENIENCE TYPES */
@@ -37,3 +49,5 @@ export interface LocalTrack {
 export type TimeFrame = "short_term" | "medium_term" | "long_term";
 
 export type TopItemsVariant = "artist_view" | "track_view";
+
+export type horoscopes = "Aquarius" | "Pisces" | "Aries" | "Taurus" | "Gemini" | "Cancer" | "Leo" | "Virgo" | "Libra" | "Scorpio" | "Sagitarius" | "Capricorn";

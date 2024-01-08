@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import DisplayUsername from "../../_components/top_artists/displays/DisplayUsername";
-import DisplayPFP from "../../_components/top_artists/displays/DisplayPFP";
+import DisplayUsername from "./displays/DisplayUsername";
+import DisplayPFP from "./displays/DisplayPFP";
 
 export default function Heading({accessToken, currentView, alternateViews, viewURLs}: 
 {accessToken: string, currentView: string, alternateViews: [string, string], viewURLs: [string, string]}){
