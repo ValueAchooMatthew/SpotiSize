@@ -26,7 +26,7 @@ export default async function Profile() {
         </div>
         <Image className="absolute top-24 right-16 w-96 h-80 hidden xl:inline-block" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
 
-        <Heading currentView="Galaxy" alternateViews={["My Constellation", "My Globe"]} viewURLs={["/horoscope", "/"]} accessToken={accessToken}/>
+        <Heading currentView="Galaxy" alternateViews={["My Constellation", "My Globe"]} viewURLs={["/horoscope", "/globe"]} accessToken={accessToken}/>
 
         <Galaxy accessToken = {accessToken} />
         

@@ -34,8 +34,6 @@ export default function assignHoroscope(danceability: number, energy: number, va
       {source: "j", target: "k"}, {source: "k", target: "l"}, {source: "l", target: "m"}, {source: "m", target: "n"}, {source: "n", target: "o"},
       {source: "o", target: "p"}, {source: "p", target: "l"}, 
     ]}
-  
-  
     },
     "low_low_high_low": {horoscope: "Aries", emoji: "🐏", data: {
       nodes: [{id: "a", default: {x: 0, y: 30}, size: 15}, {id: "b", default: {x: 225, y: 80}, size: 20},
@@ -62,7 +60,6 @@ export default function assignHoroscope(danceability: number, energy: number, va
       links: [{source: "a", target: "b"}, {source: "b", target: "c"}, {source: "b", target: "d"}, {source: "b", target: "e"}, {source: "e", target: "f"},
         {source: "f", target: "g"}, {source: "e", target: "h"}, {source: "h", target: "i"}, {source: "d", target: "j"}, {source: "j", target: "k"}, {source: "j", target: "l"},
         {source: "j", target: "m"}, {source: "m", target: "n"}, {source: "m", target: "o"}, {source: "o", target: "p"}, {source: "p", target: "q"},]
-
     }}, 
     "low_high_low_high": {horoscope: "Cancer", emoji: "🦀", data: {
       nodes: [{ id: "a", default: {x: 100, y: 0}, size: 25 }, 
@@ -87,8 +84,6 @@ export default function assignHoroscope(danceability: number, energy: number, va
         { id: "g", default: {x: 240, y: 215}, size: 20}, { id: "h", default: {x: 100, y: 190}, size: 8}],
       links: [{source: "a", target: "b"}, { source: "b", target: "c"}, { source: "c", target: "d"}, { source: "d", target: "e"},
         { source: "e", target: "f"}, { source: "c", target: "g"}, { source: "g", target: "h"}, { source: "h", target: "a"}]
-
-
     }},
     "low_high_high_high": {horoscope: "Virgo", emoji: "😇", data: {
       nodes: [{id: "a", default: {x: 170, y: 50}, size: 10}, {id: "b", default: {x: 200, y: 90}, size: 8}, {id: "c", default: {x: 165, y: 160}, size: 6}, 
@@ -98,9 +93,6 @@ export default function assignHoroscope(danceability: number, energy: number, va
       links: [{source: "a", target: "b"}, {source: "b", target: "c"}, {source: "c", target: "d"}, {source: "d", target: "e"},
         {source: "c", target: "f"}, {source: "f", target: "g"}, {source: "g", target: "h"}, {source: "f", target: "i"}, {source: "i", target: "b"},
         {source: "i", target: "j"}, {source: "j", target: "k"},]
-
-
-
     }},
     "high_low_low_low": {horoscope: "Libra", emoji: "⚖️", data: {
       nodes: [{id: "a", default: {x: 100, y: 0}, size: 15}, {id: "b", default: {x: 0, y: 85}, size: 10},{id: "c", default: {x: 200, y: 85}, size: 10}, 
@@ -118,19 +110,29 @@ export default function assignHoroscope(danceability: number, energy: number, va
       links: [{source: "a", target: "b"}, {source: "b", target: "c"}, {source: "c", target: "d"}, {source: "d", target: "e"}, {source: "e", target: "f"},
         {source: "f", target: "g"}, {source: "g", target: "h"}, {source: "h", target: "i"}, {source: "i", target: "j"}, {source: "j", target: "k"}, 
         {source: "k", target: "l"}, {source: "l", target: "m"}, {source: "m", target: "n"}, {source: "l", target: "o"}, {source: "o", target: "p"}]
-
     }},
-    // "high_low_high_low": "Sagitarius"
-    // "high_low_high_high": "Capricorn"
-
-    // const key = `${danceabilityRange}_${energyRange}_${valenceRange}_${tempoRange}`;
-    // if(horoscopeMap[key]){
-    //   return horoscopeMap[key]
-    // }else{
-    //   return undefined
-    // }
-
+    "high_low_high_low": {horoscope: "Sagitarius", emoji: "🏹", data: {
+      nodes: [{id: "a", default: {x: 200, y: 0}, size: 15}, {id: "b", default: {x: 235, y: 10}, size: 10}, {id: "c", default: {x: 225, y: 55}, size: 15}, 
+        {id: "d", default: {x: 300, y: 55}, size: 10}, {id: "e", default: {x: 275, y: 90}, size: 10}, {id: "f", default: {x: 195, y: 75}, size: 10},
+        {id: "g", default: {x: 165, y: 150}, size: 15}, {id: "h", default: {x: 200, y: 250}, size: 10}, {id: "i", default: {x: 110, y: 100}, size: 15},
+        {id: "j", default: {x: 75, y: 150}, size: 10}, {id: "k", default: {x: 60, y: 85}, size: 15}, {id: "l", default: {x: 10, y: 75}, size: 10}],
+      links: [{source: "a", target: "b"}, {source: "b", target: "c"}, {source: "c", target: "d"}, {source: "d", target: "e"},{source: "c", target: "f"}, 
+        {source: "f", target: "g"}, {source: "g", target: "h"}, {source: "g", target: "i"}, {source: "i", target: "j"}, {source: "i", target: "k"}, 
+        {source: "k", target: "l"}]
+    }},
+    "high_low_high_high": {horoscope: "Capricorn", emoji: "🐐", data: {
+      nodes: [{id: "a", default: {x: 20, y: 35}, size: 18}, {id: "b", default: {x: 90, y: 40}, size: 10}, {id: "c", default: {x: 125, y: 50}, size: 10},
+        {id: "d", default: {x: 155, y: 60}, size: 10}, {id: "e", default: {x: 245, y: 35}, size: 15}, {id: "f", default: {x: 280, y: -30}, size: 20}, 
+        {id: "g", default: {x: 216, y: 80}, size: 10}, {id: "h", default: {x: 172, y: 110}, size: 10}, {id: "i", default: {x: 140, y: 145}, size: 10},
+        {id: "j", default: {x: 75, y: 90}, size: 10}],
+      links: [{source: "a", target: "b"}, {source: "b", target: "c"}, {source: "c", target: "d"}, {source: "d", target: "e"}, {source: "e", target: "f"},
+        {source: "e", target: "g"}, {source: "g", target: "h"}, {source: "h", target: "i"}, {source: "i", target: "j"}, {source: "j", target: "a"}]
+    }}
   }
-  return horoscopeMap.high_low_low_high
-
+  const key = `${danceabilityRange}_${energyRange}_${valenceRange}_${tempoRange}`;
+  if(horoscopeMap[key]){
+    return horoscopeMap[key]
+  }else{
+    return undefined
+  }
 }

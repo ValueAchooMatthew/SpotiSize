@@ -23,7 +23,7 @@ export default async function Horoscope(){
           <Image className="w-full h-full" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
         </div>
         <Image className="absolute top-24 right-16 w-96 h-80 hidden xl:inline-block" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
-        <Heading currentView="Constellation" alternateViews={["My Galaxy", "My Globe"]} viewURLs={["/profile", "/"]} accessToken={accessToken}/>
+        <Heading currentView="Constellation" alternateViews={["My Galaxy", "My Globe"]} viewURLs={["/profile", "/globe"]} accessToken={accessToken}/>
 
         <Constellation accessToken={accessToken} />
 

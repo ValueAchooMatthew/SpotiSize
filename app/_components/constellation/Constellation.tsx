@@ -12,7 +12,7 @@ import { horoscopes } from "@/app/_types/data";
 
 export default function Constellation({ accessToken }: { accessToken: string }){
 
-  const [horoscope, setHoroscope] = useState< {horoscope: horoscopes, emoji: string, data: {nodes: StarNodes[], links: StarLinks[]}} | undefined>();
+  const [horoscope, setHoroscope] = useState<{horoscope: horoscopes, emoji: string, data: {nodes: StarNodes[], links: StarLinks[]}} | undefined>();
 
   useEffect(() => {
     const api = new SpotifyWebApi();
@@ -42,9 +42,9 @@ export default function Constellation({ accessToken }: { accessToken: string }){
     return (
       <>
         <h1 className="text-fontBlue text-center text-4xl mt-24 font-semibold">
-          Your Musical Horoscope: {horoscope?.horoscope} {horoscope?.emoji}
+          Your Musical Horoscope: {horoscope.horoscope} {horoscope.emoji}
         </h1>
-        <div className="mt-10 z-50 flex">
+        <div className="mt-10 z-50 w-fit h-fit mx-auto">
   
           <StarSimulation horoscopeData={horoscope.data} />
   

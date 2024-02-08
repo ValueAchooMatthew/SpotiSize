@@ -36,7 +36,7 @@ export default function Heading({accessToken, currentView, alternateViews, viewU
           <Link className="self-start z-30" href={{pathname: viewURLs[0]}}>
             {alternateViews[0]}
           </Link>
-          <Link className="self-start z-30" href ={{pathname: viewURLs[0]}}>
+          <Link className="self-start z-30" href ={{pathname: viewURLs[1]}}>
             {alternateViews[1]}
           </Link>
         </div>

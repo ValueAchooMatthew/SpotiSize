@@ -12,23 +12,6 @@ export default function StarSimulation({horoscopeData}: {horoscopeData: {nodes: 
   const height = 600;
 
   useEffect(()=>{
-
-    // const data = {
-    //   nodes: [{ id: "a", default: {x: 0, y: 0}, size: 25 }, 
-    //     { id: "b", default: {x: -10, y: 325}, size: 15}, 
-    //     { id: "c", default: {x: 255, y: 80}, size: 10},
-    //     { id: "d", default: {x: 325, y: 100}, size: 17 },
-    //     { id: "e", default: {x: 425, y: 90}, size: 18 },
-    //     { id: "f", default: {x: 650, y: 0}, size: 25}],
-    //   links: [
-    //     { source: "a", target: "c", value: 5 },
-    //     { source: "c", target: "d", value: 1 },
-    //     { source: "d", target: "b", value: 1 },
-    //     { source: "d", target: "e", value: 1 },
-    //     { source: "e", target: "f", value: 1 },
-    //   ],
-    // };
-    
     const links: StarLinks[] = horoscopeData.links;
     const nodes: StarNodes[] = horoscopeData.nodes;
     
@@ -51,6 +34,7 @@ export default function StarSimulation({horoscopeData}: {horoscopeData: {nodes: 
     const drag = d3.drag<HTMLCanvasElement, StarNodes>().subject((event) => {
       const coords = tryGetCoordsFromEvent(event);
       let least: StarNodes | undefined = undefined;
+      // console.log(coords)
       if (coords) {
         least = d3.least(nodes, (node) => {
           if (node.x && node.y) {
@@ -78,6 +62,7 @@ export default function StarSimulation({horoscopeData}: {horoscopeData: {nodes: 
     function dragged(event: any) {
       event.subject.fx = event.x;
       event.subject.fy = event.y;
+      console.log(event.x, event.y)
     }
     
     function dragended(event: any) {
