@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Card from "../../_components/card/card";
 export default function Contact() {
+  
   return (
 
     <div className="overflow-hidden">

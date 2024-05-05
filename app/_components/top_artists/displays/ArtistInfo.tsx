@@ -29,7 +29,7 @@ export default function ArtistInfo({ view, information, limit }: { view: "artist
             </Link>
           </div>
           <div className="flex flex-col self-center justify-center w-full">
-            <span className="md:text-3xl text-xl md:mb-4">
+            <span className="md:text-3xl text-xl md:mb-1">
               {information.name}
             </span>
             {/* Checking if song/artist is local, if so displays information based on whether it is in track or artist view, 
@@ -41,7 +41,7 @@ export default function ArtistInfo({ view, information, limit }: { view: "artist
                   Genre: {information.group}
                 </span>)
                 :
-                (<span className="text-xs">
+                (<span className="md:text-base text-xs">
                   Artist: {information.artist}
                 </span>)
               )
