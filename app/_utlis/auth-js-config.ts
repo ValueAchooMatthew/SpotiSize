@@ -35,7 +35,7 @@ async function refreshToken(token: JWT): Promise<JWT> {
     return {
       ...token,
       error:
-                `Error occured when trying to refresh the token ${(error as string)}`,
+        `Error occured when trying to refresh the token ${(error as string)}`,
     };
   }
 }
@@ -76,9 +76,9 @@ export const authOptions: NextAuthOptions = {
           accessTokenExpires: expires_at,
         };
       } else if (
-      // Not initial sign
+        // Not initial sign
         token.accessTokenExpires &&
-                Date.now() < token.accessTokenExpires
+        Date.now() < token.accessTokenExpires
       ) {
         return token;
       }

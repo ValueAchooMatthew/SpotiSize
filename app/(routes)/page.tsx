@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Home() {
 
-
+  console.log(process.env);
   return (
     <main className="relative min-h-screen h-full pb-40 overflow-hidden">
       <Image className="absolute -left-64 -z-10" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
