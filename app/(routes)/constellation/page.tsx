@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/_utlis/auth-js-config";
 import Image from "next/image";
 
 import Heading from "@/app/_components/heading/Heading";
