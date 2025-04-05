@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "npx eslint --format stylish .\\app\\ --fix"
   },
   "dependencies": {
     "@types/node": "20.3.1",
