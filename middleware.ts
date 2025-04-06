@@ -1,14 +1,10 @@
-import { withAuth } from "next-auth/middleware";
+import { auth } from "@/auth";
 
-export default withAuth(
-  {
-    secret: process.env.JWT_SECRET,
-    callbacks: {
-      authorized: ({ token }) => token?.accessToken !== undefined,
-    },
-  },
-);
+export default auth((req) => {
+  req.auth;
+});
 
+// Don't invoke Middleware on paths that don't need it
 export const config = {
-  matcher: "/profile",
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|profile).*)"], 
 };

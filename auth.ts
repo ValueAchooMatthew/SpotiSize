@@ -1,7 +1,8 @@
-import { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import { JWT } from "next-auth/jwt";
-import SpotifyProvider from "next-auth/providers/spotify";
+import Spotify from "next-auth/providers/spotify";
 import spotifyApi from "spotify-web-api-node";
+
 const base_url = "https://accounts.spotify.com/authorize?";
 
 const url_params = new URLSearchParams({
@@ -40,13 +41,12 @@ async function refreshToken(token: JWT): Promise<JWT> {
   }
 }
 
-export const authOptions: NextAuthOptions = {
-  providers: [SpotifyProvider({
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  providers: [Spotify({
     clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET as string,
     clientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
     authorization: auth_url,
   })],
-  secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/",
   },
@@ -80,9 +80,9 @@ export const authOptions: NextAuthOptions = {
         token.accessTokenExpires &&
         Date.now() < token.accessTokenExpires
       ) {
-        return token;
+        return refreshToken(token);
       }
       return refreshToken(token);
     },
   },
-};
+});
