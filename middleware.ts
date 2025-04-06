@@ -6,5 +6,5 @@ export default auth((req) => {
 
 // Don't invoke Middleware on paths that don't need it
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|profile).*)"], 
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

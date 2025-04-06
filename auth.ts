@@ -13,30 +13,50 @@ const url_params = new URLSearchParams({
 
 const auth_url = base_url + url_params;
 
-async function refreshToken(token: JWT): Promise<JWT> {
-  let api = new spotifyApi();
-  if (!token.accessToken || !token.refreshToken) {
+async function refreshToken(jwt: JWT): Promise<JWT> {
+  // let api = new spotifyApi();
+  if (!jwt.accessToken || !jwt.refreshToken) {
     return {
-      ...token,
+      ...jwt,
       error: "Access Token or Refresh Token were undefined",
     };
   }
+  // refresh token that has been previously stored
+  const refreshToken = jwt.refreshToken;
+  const url = "https://accounts.spotify.com/api/token";
 
   try {
-    api.setAccessToken(token.accessToken);
-    api.setRefreshToken(token.refreshToken);
-
-    const { body: refreshedToken } = await api.refreshAccessToken();
+    const payload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+        client_id: process.env.AUTH_SPOTIFY_ID as string,
+      }),
+    };
+    const response = await fetch(url, payload);
+    // Return err if anything but successful response
+    if (response.status != 200) {
+      return {
+        ...jwt,
+        error:
+          `Error occured when trying to refresh the token ${(response.status)}`,
+      };
+    }
+    const refreshed_token_data = await response.json();
 
     return {
-      ...token,
-      accessToken: refreshedToken.access_token,
-      accessTokenExpires: Date.now() + refreshedToken.expires_in * 1000,
-      refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
+      ...jwt,
+      accessToken: refreshed_token_data.access_token,
+      accessTokenExpires: Date.now() + refreshed_token_data.expires_in * 1000,
+      refreshToken: refreshed_token_data.refresh_token ?? jwt.refreshToken,
     };
   } catch (error) {
     return {
-      ...token,
+      ...jwt,
       error:
         `Error occured when trying to refresh the token ${(error as string)}`,
     };
@@ -45,8 +65,8 @@ async function refreshToken(token: JWT): Promise<JWT> {
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [Spotify({
-    clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET as string,
-    clientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
+    clientSecret: process.env.AUTH_SPOTIFY_SECRET as string,
+    clientId: process.env.AUTH_SPOTIFY_ID as string,
     authorization: auth_url,
   })],
   pages: {
@@ -82,9 +102,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.accessTokenExpires &&
         Date.now() < token.accessTokenExpires
       ) {
-        return refreshToken(token);
+        return token;
       }
       return refreshToken(token);
+    },
+    authorized: async ({ auth }) => {
+      // Logged in users are authenticated, otherwise redirect to login page
+      return !!auth?.user.accessToken; // Fancy syntax for Some => true, None => false
     },
   },
 });
