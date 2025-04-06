@@ -14,7 +14,7 @@ export default async function Profile() {
 
 
   if (accessToken) {
-    api.setAccessToken(accessToken);
+    api.setAccessToken(accessToken); //TODO (MT): Why is this here?
 
     return (
       <main className="w-full md:p-8 flex flex-col">
