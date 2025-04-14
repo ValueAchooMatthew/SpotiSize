@@ -23,7 +23,7 @@ type CirclePackingProps = {
 export const CirclePacking = ({ width, height, data, setInformation, bubbleSize, canvasRef }: CirclePackingProps) => {
   // The force simulation mutates nodes, so create a copy first
   // Node positions are initialized by d3
-  
+
 
   useEffect(() => {
     const nodes: Node[] = data;
@@ -41,7 +41,7 @@ export const CirclePacking = ({ width, height, data, setInformation, bubbleSize,
     //   }
 
     // })
-    
+
 
     const [min, max] = extent(nodes.map((d) => d.value)) as [number, number];
     const sizeScale = scaleSqrt()

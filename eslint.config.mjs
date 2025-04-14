@@ -1,5 +1,5 @@
 import nextPlugin from "@next/eslint-plugin-next";
-import stylistic from '@stylistic/eslint-plugin'
+import stylistic from "@stylistic/eslint-plugin"
 
 
 const eslintConfig = [

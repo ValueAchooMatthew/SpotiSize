@@ -17,7 +17,7 @@
     "eslint-config-next": "^15.2.4",
     "next": "^15.2.4",
     "next-auth": "^5.0.0-beta.25",
-    "rc-slider": "^10.5.0",
+    "rc-slider": "^11.1.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-range": "^1.8.14",

@@ -1,6 +1,7 @@
-/** @type {import('next').NextConfig} */
+import type { NextConfig } from "next";
+import { RemotePattern } from "next/dist/shared/lib/image-config";
 
-const IMAGE_PATTERNS = [
+const IMAGE_PATTERNS: RemotePattern[] = [
   {
     protocol: "https",
     hostname: "i.scdn.co",
@@ -15,14 +16,16 @@ const IMAGE_PATTERNS = [
     pathname: "/u/*", //All the github images will be request from this resource
     search: "",
   },
-]
+];
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   experimental: {
     typedRoutes: true,
   },
-  images : {
+  images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: IMAGE_PATTERNS,
   },
-}
-module.exports = nextConfig
+};
+
+module.exports = nextConfig;

@@ -1,7 +1,6 @@
 import { ScalePower } from "d3";
 import { Node } from "@/app/_types/data";
 
-
 export const drawCircles = (
   context: CanvasRenderingContext2D,
   width: number,
@@ -20,10 +19,10 @@ export const drawCircles = (
       return;
     }
     if (node.img) {
-      const bubbleDiameter = sizeScale(node.value) + 2*bubble_size;
+      const bubbleDiameter = sizeScale(node.value) + 2 * bubble_size;
       const x = node.x - bubbleDiameter / 2;
       const y = node.y - bubbleDiameter / 2;
-  
+
       context.save();
       context.beginPath();
       context.arc(
@@ -31,25 +30,25 @@ export const drawCircles = (
         node.y,
         sizeScale(node.value) / 2 + bubble_size,
         0,
-        2 * Math.PI
+        2 * Math.PI,
       );
       context.closePath();
       context.clip();
-  
+
       // Calculate the scaling factors for the image
       const scaleWidth = bubbleDiameter / node.img.width;
       const scaleHeight = bubbleDiameter / node.img.height;
-      console.log(scaleWidth, scaleHeight);
+
       const scale = Math.max(scaleWidth, scaleHeight);
-  
+
       // Calculate the new width and height of the image after scaling
       const newWidth = node.img.width * scale;
       const newHeight = node.img.height * scale;
-  
+
       // Calculate the position to center the scaled image within the bubble
       const offsetX = (bubbleDiameter - newWidth) / 2 + x;
       const offsetY = (bubbleDiameter - newHeight) / 2 + y;
-  
+
       context.drawImage(
         node.img,
         0,
@@ -59,11 +58,10 @@ export const drawCircles = (
         offsetX,
         offsetY,
         newWidth,
-        newHeight
+        newHeight,
       );
-  
+
       context.restore();
     }
-  
   });
 };
