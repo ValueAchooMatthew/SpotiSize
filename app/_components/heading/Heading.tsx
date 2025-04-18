@@ -15,20 +15,20 @@ export default function Heading({ accessToken, currentView, alternateViews, view
         <div>
           <div className="flex justify-between">
             <DisplayPFP accessToken={accessToken}></DisplayPFP>
-            <Link href={"/"} className="h-fit">
-              <div className="w-fit mx-auto hover:-translate-y-2 transition-all duration-300 will-change-transform">
-                <form
-                  action={async () => {
-                    "use server"
-                    await signOut()
-                  }}>
-                  <button className="bg-lightPurple hover:bg-yellow text-white xl:text-2xl text-lg font-bold font-jost py-2 px-4 rounded-full ">
-                    Log Out
-                  </button>
-                </form>
-                <button className="bg-[#6545FF] w-full h-10 rounded-full mx-auto absolute -bottom-1.5 left-1 -z-10"></button>
-              </div>
-            </Link>
+            {/* <Link href={"/"} className=""> */}
+            <div className="h-fit w-fit mx-auto hover:-translate-y-2 transition-all duration-300 will-change-transform">
+              <form
+                action={async () => {
+                  "use server"
+                  await signOut({ redirectTo: "/" })
+                }}>
+                <button className="bg-lightPurple hover:bg-yellow text-white xl:text-2xl text-lg font-bold font-jost py-2 px-4 rounded-full ">
+                  Log Out
+                </button>
+              </form>
+              <button className="bg-[#6545FF] w-full h-10 rounded-full mx-auto absolute -bottom-1.5 left-1 -z-10"></button>
+            </div>
+            {/* </Link> */}
           </div>
           <h3 className="text-fontBlue 2xl:text-4xl xs:text-4xl text-2xl 2xl:py-1.5 py-0.5">
             <DisplayUsername accessToken={accessToken}></DisplayUsername>

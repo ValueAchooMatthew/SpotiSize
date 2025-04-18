@@ -108,7 +108,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     authorized: async ({ auth }) => {
       // Logged in users are authenticated, otherwise redirect to login page
-      return !!auth?.user.accessToken; // Fancy syntax for Some => true, None => false
+      return !!(auth?.user.accessToken); // Fancy syntax for Some => true, None => false
     },
   },
 });
