@@ -1,10 +1,8 @@
-"use client";
-import { signIn } from "next-auth/react";
+import { signIn } from "@/auth"
 import Image from "next/image";
 
 
 export default function Home() {
-
 
   return (
     <main className="relative min-h-screen h-full pb-40 overflow-hidden">
@@ -35,8 +33,11 @@ export default function Home() {
 
       </div>
 
-      <div className="mt-18"
-        onClick={() => signIn("spotify", { callbackUrl: "/profile" })}
+      <form className="mt-18"
+        action={async () => {
+          "use server"
+          await signIn("spotify", { redirectTo: "/profile" })
+        }}
       >
         <h4 className=" font-jost text-yellow italic text-center md:text-3xl text-2xl">
           Discover your musical galaxy
@@ -52,7 +53,7 @@ export default function Home() {
           <div className="bg-[#6445ff] w-full md:h-24 h-16 rounded-full mx-auto absolute md:-bottom-3 -bottom-2 left-1 -z-10">
           </div>
         </div>
-      </div>
+      </form>
 
     </main>
   );

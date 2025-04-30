@@ -16,22 +16,22 @@ module.exports = {
 
       "medsmal": "560px",
 
-      'sm': '640px',
+      "sm": "640px",
       // => @media (min-width: 640px) { ... }
 
-      'md': '940px',
+      "md": "940px",
       // => @media (min-width: 940px) { ... }
 
-      'lg': '1024px',
+      "lg": "1024px",
       // => @media (min-width: 1024px) { ... }
 
       "semilarge": "1200px",
       // => @media (min-width: 1200px) { ... }
 
-      'xl': '1280px',
+      "xl": "1280px",
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1536px',
+      "2xl": "1536px",
       // => @media (min-width: 1536px) { ... }
 
 
@@ -45,7 +45,7 @@ module.exports = {
         lightPurple: "#9F8BFF", 
       },
       fontFamily: {
-        jost: ['Jost', 'sans-serif'],
+        jost: ["Jost", "sans-serif"],
       }
     },
   },

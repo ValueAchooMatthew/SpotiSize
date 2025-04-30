@@ -23,8 +23,8 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
   // const [imageSrc, setImageSrc] = useState<string | undefined>(undefined);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const handleShare = (canvasReference: RefObject<HTMLCanvasElement>) =>{
-    if(canvasReference && canvasReference.current){
+  const handleShare = (canvasReference: RefObject<HTMLCanvasElement>) => {
+    if (canvasReference && canvasReference.current) {
       // const data = canvasReference.current.toDataURL();
       // setImageSrc(data)
     }
@@ -33,7 +33,7 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
     if (width >= 940) {
       setBubbleSize(30);
       setDimensions(650);
-    }else if (width >= 480) {
+    } else if (width >= 480) {
       setBubbleSize(14);
       setDimensions(400);
     } else {
@@ -76,7 +76,7 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
       return tracksToNodes(topTracks);
 
     };
-    retrieve().then(setData).catch(console.log);
+    retrieve().then(setData).catch(console.error);
   }, [accessToken, limit, timeFrame, topItemsVariant]);
 
   if (data) {
@@ -93,8 +93,6 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
               </div>
               <span className="text-center text-fontBlue my-4 md:text-3xl text-2xl font-semibold">Number of artists: {limit}</span>
               <div className="pb-5 mx-12 self-center flex md:w-[30rem] w-[15rem] justify-center">
-                {/* Setting information only to undefined if user is actually changing into a different limit, otherwise 
-                            results in unnecessary updates in the DOM */}
                 <Slider className=" md:px-12 w-12"
                   marks={
                     {
@@ -110,7 +108,16 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
                   }
                   reverse={false}
                   vertical={false}
-                  onChangeComplete={(event) => { if (event as Number != limit) { setInformation(undefined); } setLimit(event as number); }}
+                  onChangeComplete={(num_or_num_arr) => {
+                    // Looks evil but coerces to number every time
+
+                    // Basically just unpacks either an array into another array (that is empty)
+                    // or an array of arrays into another array (that is empty)
+
+                    // Flattening + taking first member should always give a number,
+                    // this assuming rc-slider doesnt ever give a empty arr
+                    setLimit([...[num_or_num_arr]].flat()[0])
+                  }}
                   defaultValue={25}
                   max={35}
                   min={3} />
@@ -119,7 +126,7 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
             <div className="justify-center w-full 2xl:h-full h-fit 2xl:flex 2xl:mt-0">
               <div className="flex flex-col justify-start align-center 2xl:ml-8">
                 {/* Currently does not work but planned share button for the future */}
-                <svg onClick={()=>{handleShare(canvasRef)}} className="2xl:self-end mr-8 mt-8 self-center lg:w-12 lg:h-12 lg:mt-0 w-9 h-9 text-fontBlue hover:cursor-pointer mx-4" fill="none" strokeWidth={1.5} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <svg onClick={() => { handleShare(canvasRef) }} className="2xl:self-end mr-8 mt-8 self-center lg:w-12 lg:h-12 lg:mt-0 w-9 h-9 text-fontBlue hover:cursor-pointer mx-4" fill="none" strokeWidth={1.5} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
                 </svg>
                 <div className="2xl:flex flex-col max-h-fit md:h-[20rem] h-[10 rem] md:p-8 p-2 text-center min-w-full w-[40rem] border-4 border-black rounded-[5rem] justify-center hidden ">

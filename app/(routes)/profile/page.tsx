@@ -1,21 +1,20 @@
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import Image from "next/image";
 
 import TopArtists from "../../_components/top_artists/TopArtists";
 import SpotifyWebApi from "spotify-web-api-node";
 import Heading from "@/app/_components/heading/Heading";
+import { auth } from "@/auth";
 
 export default async function Profile() {
 
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   const accessToken = session?.user.accessToken;
   const api = new SpotifyWebApi();
 
 
 
-  if(accessToken){
-    api.setAccessToken(accessToken);
+  if (accessToken) {
+    api.setAccessToken(accessToken); //TODO (MT): Why is this here?
 
     return (
       <main className="w-full md:p-8 flex flex-col">
@@ -27,16 +26,16 @@ export default async function Profile() {
         </div>
         <Image className="absolute top-24 right-16 w-96 h-80 hidden xl:inline-block" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
 
-        <Heading currentView="Galaxy" alternateViews={["My Constellation", "My Globe"]} viewURLs={["/constellation", "/"]} accessToken={accessToken}/>
+        <Heading currentView="Galaxy" alternateViews={["My Constellation", "My Globe"]} viewURLs={["/constellation", "/"]} accessToken={accessToken} />
 
-        <TopArtists accessToken = {accessToken} ></TopArtists>
-        
-          
+        <TopArtists accessToken={accessToken} ></TopArtists>
+
+
       </main>
     );
   }
-  return(
+  return (
     <p>There was an error</p>
   );
-    
+
 }
