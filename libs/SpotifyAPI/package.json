@@ -1,0 +1,13 @@
+{
+  "name": "spotifyapi",
+  "version": "1.0.0",
+  "description": "Custom/simplified Spotify API implementation for Spotisize",
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "src/lib.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {}
+}
