@@ -19,9 +19,7 @@ const IMAGE_PATTERNS: RemotePattern[] = [
 ];
 
 const nextConfig: NextConfig = {
-  experimental: {
-    typedRoutes: true,
-  },
+  typedRoutes: true,
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: IMAGE_PATTERNS,
