@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typegen": "next typegen",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config  --fix",
+    "lint": "next lint --fix",
     "clean": "rimraf .next && rimraf node_modules"
   },
   "dependencies": {
