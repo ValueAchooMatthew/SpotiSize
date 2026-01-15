@@ -16,7 +16,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -29,7 +29,7 @@
       ]
     },
     "typeRoots": [
-      "./types",
+      "./types"
     ]
   },
   "include": [
@@ -37,7 +37,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "eslint.config.mjs"
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

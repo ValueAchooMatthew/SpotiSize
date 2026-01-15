@@ -1,4 +1,4 @@
-export { auth as middleware } from "@/auth";
+export { auth as proxy } from "@/auth";
 
 // Don't invoke Middleware on paths that don't need it
 export const config = {
