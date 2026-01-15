@@ -10,16 +10,12 @@ export const metadata = {
   description: "Playground to test out using the Spotify API",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout(props: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body className={inter.className + " bg-gradient-to-b from-[#11005e] to-slate-950 min-h-screen h-fit min-w-fit w-full"} >
         <Navbar></Navbar>
-        {children}
+        {props.children}
       </body>
     </html>
   );
