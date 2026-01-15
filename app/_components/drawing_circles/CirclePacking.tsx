@@ -15,7 +15,7 @@ type CirclePackingProps = {
   width: number;
   height: number;
   data: Node[];
-  canvasRef: RefObject<HTMLCanvasElement>
+  canvasRef: RefObject<HTMLCanvasElement | null>
   setInformation: Dispatch<SetStateAction<RegularTrack | LocalTrack | undefined>>,
   bubbleSize: number;
 };

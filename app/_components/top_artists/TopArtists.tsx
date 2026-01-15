@@ -23,7 +23,7 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
   // const [imageSrc, setImageSrc] = useState<string | undefined>(undefined);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const handleShare = (canvasReference: RefObject<HTMLCanvasElement>) => {
+  const handleShare = (canvasReference: RefObject<HTMLCanvasElement | null>) => {
     if (canvasReference && canvasReference.current) {
       // const data = canvasReference.current.toDataURL();
       // setImageSrc(data)
