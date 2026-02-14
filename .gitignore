@@ -37,3 +37,6 @@ next-env.d.ts
 
 # VSCode
 .vscode
+
+# Certs for https dev server
+certificates
