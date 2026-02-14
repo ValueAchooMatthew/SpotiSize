@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --flag unstable_native_nodejs_ts_config --fix",
+    "lint": "eslint --flag unstable_native_nodejs_ts_config  --fix",
     "clean": "rimraf .next && rimraf node_modules"
   },
   "dependencies": {
@@ -14,8 +14,7 @@
     "@types/react": "19.2.8",
     "@types/react-dom": "19.2.3",
     "d3": "^7.8.5",
-    "eslint-config-next": "16.1.2",
-    "next": "16.1.2",
+    "next": "16.1.6",
     "next-auth": "^5.0.0-beta.30",
     "rc-slider": "^11.1.8",
     "react": "19.2.3",
@@ -32,6 +31,7 @@
     "@types/d3": "^7.4.3",
     "@types/spotify-api": "^0.0.22",
     "@types/spotify-web-api-node": "^5.0.11",
+    "eslint-config-next": "16.1.2",
     "eslint": "^9.39.2",
     "globals": "^17.0.0",
     "postcss": "^8.5.6",
