@@ -1,5 +1,5 @@
 import NextAuth, { DefaultSession } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import { DefaultJWT } from "next-auth/jwt";
 
 declare module "next-auth" {
   /**
@@ -16,7 +16,7 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
   /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
-  interface JWT {
+  interface JWT extends DefaultJWT {
     /**
      * Token used to access the spotify API.
      * Expires every hour
