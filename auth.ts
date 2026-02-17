@@ -2,9 +2,6 @@ import NextAuth from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Spotify from "next-auth/providers/spotify";
 
-// TODO (MT): This lib is beyond deprecated, need another one or to just make our own... later
-import spotifyApi from "spotify-web-api-node";
-
 const base_url = "https://accounts.spotify.com/authorize?";
 
 const url_params = new URLSearchParams({
