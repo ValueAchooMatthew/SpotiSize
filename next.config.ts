@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: IMAGE_PATTERNS,
   },
+  allowedDevOrigins: ['127.0.0.1', '*.local-origin.dev'],
 };
 
 module.exports = nextConfig;
