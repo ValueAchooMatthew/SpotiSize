@@ -46,7 +46,7 @@ export const auth = betterAuth({
   // baseURL: app_base_url,
   // basePath: app_base_api_path, 
   // secret: app_secret,
-  trustedOrigins: ["https://*.spotify.com", "https://spotify.com", "https://localhost:3000", "http://localhost:3000"],
+  trustedOrigins: ["https://*.spotify.com", "https://spotify.com", "https://127.0.0.1:3000"],
   
   // // Configure options affecting a users login session each time they log in 
   // session: {
