@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import DisplayUsername from "../../_components/top_artists/displays/DisplayUsername";
 import DisplayPFP from "../../_components/top_artists/displays/DisplayPFP";
-import { signOut } from "@/auth";
+import { auth } from "@/auth";
 
 export default function Heading({ accessToken, currentView, alternateViews, viewURLs }:
   { accessToken: string, currentView: string, alternateViews: [string, string], viewURLs: [string, string] }) {
@@ -20,7 +20,7 @@ export default function Heading({ accessToken, currentView, alternateViews, view
               <form
                 action={async () => {
                   "use server"
-                  await signOut({ redirectTo: "/" })
+                  await auth.api.signOut();
                 }}>
                 <button className="bg-lightPurple hover:bg-yellow text-white xl:text-2xl text-lg font-bold font-jost py-2 px-4 rounded-full ">
                   Log Out

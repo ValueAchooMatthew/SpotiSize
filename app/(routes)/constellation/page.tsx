@@ -1,11 +1,15 @@
 import { auth } from "@/auth";
+import { headers } from "next/headers";
+
 import Image from "next/image";
 
 import Heading from "@/app/_components/heading/Heading";
 
 export default async function Constellation() {
-  const session = await auth();
-  const accessToken = session?.user.accessToken;
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const accessToken = session?.session.token;
   if (accessToken) {
     return (
       <main className="w-full md:p-8 flex flex-col">
