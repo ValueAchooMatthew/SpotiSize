@@ -4,22 +4,19 @@ import TopArtists from "../../_components/top_artists/TopArtists";
 import SpotifyWebApi from "spotify-web-api-node";
 import Heading from "@/app/_components/heading/Heading";
 import { auth } from "@/auth";
+import { Route } from "next";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 
 export default async function Profile() {
 
   const session = await auth.api.getSession({
-  headers: await headers(),
+    headers: await headers(),
   });
-  const accessToken = session?.session.token;
-  const api = new SpotifyWebApi();
-
-
-
-  if (accessToken) {
-    api.setAccessToken(accessToken); //TODO (MT): Why is this here?
-
+  
+  if (session) {
+    const accessToken = session?.session.token; // Likely not the right way to use this by passing it down, use route handlers
     return (
       <main className="w-full md:p-8 flex flex-col">
         <div className="overflow-hidden absolute top-48 -z-20 -left-24 w-84 h-84">
@@ -30,16 +27,14 @@ export default async function Profile() {
         </div>
         <Image className="absolute top-24 right-16 w-96 h-80 hidden xl:inline-block" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
 
-        <Heading currentView="Galaxy" alternateViews={["My Constellation", "My Globe"]} viewURLs={["/constellation", "/"]} accessToken={accessToken} />
+        <Heading currentView="Galaxy" alternateViews={["My Constellation", "My Globe"]} viewURLs={["/constellation" as Route, "/" as Route]} />
 
-        <TopArtists accessToken={accessToken} ></TopArtists>
+        <TopArtists accessToken={accessToken} ></TopArtists> {/*MT: figure out if we need to pass this down*/}
 
 
       </main>
     );
+  } else {
+    redirect("/");
   }
-  return (
-    <p>There was an error</p>
-  );
-
 }

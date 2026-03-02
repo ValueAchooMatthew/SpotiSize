@@ -1,15 +1,15 @@
-import SpotifyWebApi from "spotify-web-api-node";
+import { auth } from "@/auth";
+import { headers } from "next/headers";
 
-
-export default async function DisplayUsername({ accessToken }: { accessToken: string }) {
-  const api = new SpotifyWebApi();
-  api.setAccessToken(accessToken);
-  const user = await api.getMe();
+export default async function DisplayUsername() {
+  const session = await auth.api.getSession({
+        headers: await headers(),
+  });
+  const name = session?.user.name; // Can be null/undef thechnically but edgecase for later
 
   return (
-
     <p className="">
-      {user.body.display_name + "'s"}
+      {name + "'s"}
     </p>
     
   );

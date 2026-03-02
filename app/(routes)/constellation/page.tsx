@@ -4,13 +4,14 @@ import { headers } from "next/headers";
 import Image from "next/image";
 
 import Heading from "@/app/_components/heading/Heading";
+import { Route } from "next";
+import { redirect } from "next/navigation";
 
 export default async function Constellation() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  const accessToken = session?.session.token;
-  if (accessToken) {
+  if (session) {
     return (
       <main className="w-full md:p-8 flex flex-col">
 
@@ -21,7 +22,7 @@ export default async function Constellation() {
           <Image className="w-full h-full" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
         </div>
         <Image className="absolute top-24 right-16 w-96 h-80 hidden xl:inline-block" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
-        <Heading currentView="Constellation" alternateViews={["My Galaxy", "My Globe"]} viewURLs={["/profile", "/"]} accessToken={accessToken} />
+        <Heading currentView="Constellation" alternateViews={["My Galaxy", "My Globe"]} viewURLs={["/profile" as Route, "/" as Route]}/>
 
         <div>
 
@@ -30,12 +31,6 @@ export default async function Constellation() {
       </main>
     )
   } else {
-    return (
-      <div>
-        Balls
-      </div>
-
-    )
-
+    redirect("/");
   }
 }
