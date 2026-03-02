@@ -4,11 +4,15 @@ import TopArtists from "../../_components/top_artists/TopArtists";
 import SpotifyWebApi from "spotify-web-api-node";
 import Heading from "@/app/_components/heading/Heading";
 import { auth } from "@/auth";
+import { headers } from "next/headers";
+
 
 export default async function Profile() {
 
-  const session = await auth();
-  const accessToken = session?.user.accessToken;
+  const session = await auth.api.getSession({
+  headers: await headers(),
+  });
+  const accessToken = session?.session.token;
   const api = new SpotifyWebApi();
 
 
