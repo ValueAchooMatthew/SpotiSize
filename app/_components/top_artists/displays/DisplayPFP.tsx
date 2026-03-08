@@ -2,9 +2,6 @@ import { auth } from "@/auth";
 import { headers } from "next/headers";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
-import SpotifyWebApi from "spotify-web-api-node";
-
 
 export default async function DisplayUsername() {
   const session = await auth.api.getSession({
