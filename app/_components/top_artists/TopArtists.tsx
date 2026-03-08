@@ -62,10 +62,11 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
 
   }, []);
 
+  const api = new SpotifyWebApi();
+  api.setAccessToken(accessToken);
+  
   useEffect(() => {
     const retrieve = async () => {
-      const api = new SpotifyWebApi();
-      api.setAccessToken(accessToken);
       if (topItemsVariant == "artist_view") {
         const response = await api.getMyTopArtists({ limit: limit, time_range: timeFrame });
         const topArtists = response.body.items;
