@@ -1,7 +1,4 @@
-import { auth } from "@/auth"
-import NextAuth from "next-auth";
-import { NextAuthRequest } from "next-auth/lib"
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from 'next/server'
 import type SpotifyApi from "spotify-web-api-node";
 
 // TODO: https://github.com/omermecitoglu/next-openapi-route-handler/issues/21#issuecomment-3241053381
@@ -9,9 +6,9 @@ import type SpotifyApi from "spotify-web-api-node";
   // Presave params
   const { timeframe, count } = await ctx.params; 
 
-  const session = await auth();
+  // const session = await auth();
 
-  return NextResponse.json<SpotifyApi.UsersTopArtistsResponse>()
+  return NextResponse.json<unknown>({})
 }
 
 
