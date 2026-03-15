@@ -1,5 +1,4 @@
 import {Pattern as P, match, isMatching} from "ts-pattern"
-import 'ts-pattern/types';
 // Definitions mostly from official docs: https://developer.spotify.com/documentation/web-api/concepts/api-calls#response-status-codes
 
 // Use ts-pattern to easily destructure and infer the type of error on the fly
