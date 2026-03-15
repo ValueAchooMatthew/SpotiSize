@@ -15,7 +15,6 @@ export default async function Profile() {
       },
       headers: await headers() 
     });
-  
     return (
       <main className="w-full md:p-8 flex flex-col">
         <div className="overflow-hidden absolute top-48 -z-20 -left-24 w-84 h-84">
@@ -29,7 +28,8 @@ export default async function Profile() {
         <Heading currentView="Galaxy" alternateViews={["My Constellation", "My Globe"]} viewURLs={["/constellation" as Route, "/" as Route]} />
 
         <TopArtists accessToken={accessToken}/> 
-
+        <div>
+        </div>
 
       </main>
     );

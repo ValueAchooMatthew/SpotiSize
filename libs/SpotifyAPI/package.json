@@ -1,5 +1,5 @@
 {
-  "name": "spotifyapi",
+  "name": "spotifyapi-spotisize",
   "version": "1.0.0",
   "description": "Custom/simplified Spotify API implementation for Spotisize",
   "license": "MIT",

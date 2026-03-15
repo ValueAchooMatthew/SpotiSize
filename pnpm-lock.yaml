@@ -44,6 +44,9 @@ importers:
       spotify-web-api-node:
         specifier: ^5.0.2
         version: 5.0.2
+      spotifyapi-spotisize:
+        specifier: workspace:*
+        version: link:libs/SpotifyAPI
       typescript:
         specifier: ^5.9.3
         version: 5.9.3

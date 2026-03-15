@@ -30,7 +30,8 @@
     // "noUnusedParameters": true,
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
-
+       "allowImportingTsExtensions": true,
+       "emitDeclarationOnly": true,
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",

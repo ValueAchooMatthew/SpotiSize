@@ -1,7 +1,6 @@
 import {Pattern as P, isMatching, match} from "ts-pattern"
-import 'ts-pattern/types';
-import { DEFAULT_SPOTIFY_BASE_URL } from "../api.js";
-import { get_err_details, SpotifyErrorPattern, type SpotifyError } from "../err.js";
+import { DEFAULT_SPOTIFY_BASE_URL } from "../api.ts";
+import { get_err_details, SpotifyErrorPattern, type SpotifyError } from "../err.ts";
 // Pretty much everything comes from official doc page
 // https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
 

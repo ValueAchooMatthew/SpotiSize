@@ -23,6 +23,7 @@
     "react-range": "^1.10.0",
     "sharp": "^0.34.5",
     "spotify-web-api-node": "^5.0.2",
+    "spotifyapi-spotisize": "workspace:*",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
