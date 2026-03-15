@@ -27,7 +27,7 @@ function assertValidCount(countStr: string): number {
 }
 
 
-export async function GET(_req: NextRequest, ctx: RouteContext<"/api/spotify/tracks/[timeframe]/[count]">) {
+export async function GET(_req: NextRequest, ctx: RouteContext<"/api/tracks/[timeframe]/[count]">) {
     const { timeframe, count } = await ctx.params;
     // Avoid sending API req to Spotify if malformed params
     const countValid = assertValidCount(count);
@@ -43,3 +43,5 @@ export async function GET(_req: NextRequest, ctx: RouteContext<"/api/spotify/tra
 
     return Response.json(epic)
 }
+
+export async function get_top_tracks_pageGET(_req: NextRequest, ctx: RouteContext<"/api/tracks/[timeframe]/[count]">) {}
