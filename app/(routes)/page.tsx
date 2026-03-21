@@ -7,14 +7,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen h-full pb-40 overflow-hidden">
       
-      <Image className="absolute -top-56 right-0 w-[40rem] h-[40rem]" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
-      <Image className="absolute hidden md:inline-block top-20 2xl:right-64 lg:right-32 right-12 lg:w-72 lg:h-72 w-56 h-56 -z-10" width={1000} height={1000} src={"/img/saturn.svg"} alt="saturn image" ></Image>
-      <Image className="absolute hidden 2xl:inline-block bottom-1/2 right-32 w-48 h-48 -z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-      <Image className="absolute hidden md:inline-block bottom-32 right-64 w-28 h-32 -z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-      <Image className="absolute hidden md:inline-block bottom-12 left-64 w-28 h-32 -z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-      <Image className="absolute hidden md:inline-block -top-32 right-1/2 w-28 h-32 -z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-      <Image className="absolute hidden md:inline-block top-1/4 md:left-24 w-32 h-28 flip -z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
-
+      
 
       <div className="mt-32 relative w-fit h-fit mx-auto font-jost">
         <h3 className="absolute text-secondary md:text-6xl medsmal:text-4xl sm:text-2xl text-xl text-center medsmal:top-10 md:top-14 top-16 md:-left-60 medsmal:-left-28 xs:-left-20 -left-16">

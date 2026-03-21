@@ -10,7 +10,7 @@ export default function Navbar() {
     <nav className="flex top-0 z-10 w-full h-16 bg-transparent">
       {/* Replace with Logo and "Spotisize" that we can design */}
       <div className="flex flex-row justify-between items-center h-fit w-full sm:pr-5 pr-1 pl-2 2xl:pr-">
-        <Link href="/" className="flex flex-wrap">
+        <Link href="/" className="flex">
           <Image
             src={"/img/saturn.svg"}
             alt="Home"
