@@ -11,13 +11,15 @@ export const authClient = createAuthClient(
     // }
 )
 
+
+// TODO (MT): mae this only go through if already no signed in
 export async function signIn() : Promise<void> {
-    const {data, error} = await authClient.signIn.social({
+    await authClient.signIn.social({
         provider: "spotify",
         callbackURL: "/profile" as Route
     });
 }
 
 export async function signOut() : Promise<void> {
-    const {data, error} = await authClient.signOut();
+    await authClient.signOut();
 }

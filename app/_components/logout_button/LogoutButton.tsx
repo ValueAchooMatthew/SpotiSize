@@ -1,11 +1,14 @@
 "use client"
 
 import { signOut } from "@/auth-client"
-
+import { useRouter } from 'next/navigation'
+ 
 export default function LogoutButton() {
+  const router = useRouter()
+
   return (                                                                                                                                                          
     <div className="relative w-fit mx-auto hover:-translate-y-4 transition-all duration-300 will-change-transform">
-        <button onClick={signOut}  className="bg-bad-secondary md:px-12 md:py-8 px-6 py-4 text-center flex justify-center self-center rounded-full shadow-2xl mx-auto mt-8 z-10" >
+        <button onClick={() => { signOut().then(() => router.push('/')) }}  className="bg-bad-secondary md:px-12 md:py-8 px-6 py-4 text-center flex justify-center self-center rounded-full shadow-2xl mx-auto mt-8 z-10" >
             <span className="font-jost md:text-4xl text-2xl text-white font-bold" >
                 Log Out
             </span>
