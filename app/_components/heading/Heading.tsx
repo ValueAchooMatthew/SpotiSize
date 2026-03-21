@@ -15,11 +15,6 @@ export default function Heading({ currentView, alternateViews, viewURLs }:
         <div>
           <div className="flex justify-between">
             <DisplayPFP></DisplayPFP>
-            {/* <Link href={"/"} className=""> */}
-            <div className="h-fit w-fit mx-auto hover:-translate-y-2 transition-all duration-300 will-change-transform">
-              <LogoutButton/>
-            </div>
-            {/* </Link> */}
           </div>
           <h3 className="text-fontBlue 2xl:text-4xl xs:text-4xl text-2xl 2xl:py-1.5 py-0.5">
             <DisplayUsername/>
