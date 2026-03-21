@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen h-full pb-40 overflow-hidden">
       
-      {/* <Image className="absolute -top-56 right-0 w-[40rem] h-[40rem]" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image> */}
+      <Image className="absolute -top-56 right-0 w-[40rem] h-[40rem]" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
       <Image className="absolute hidden md:inline-block top-20 2xl:right-64 lg:right-32 right-12 lg:w-72 lg:h-72 w-56 h-56 -z-10" width={1000} height={1000} src={"/img/saturn.svg"} alt="saturn image" ></Image>
       <Image className="absolute hidden 2xl:inline-block bottom-1/2 right-32 w-48 h-48 -z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
       <Image className="absolute hidden md:inline-block bottom-32 right-64 w-28 h-32 -z-10" width={1000} height={1000} src={"/img/Long cloud.svg"} alt="cloud"></Image>
@@ -33,14 +33,14 @@ export default function Home() {
       </div>
 
      
-        <h4 className=" font-jost text-yellow italic text-center md:text-3xl text-2xl">
+        <h4 className=" font-jost text-accent italic text-center md:text-3xl text-2xl">
           Discover your musical galaxy
         </h4>
 
         <div className="relative w-fit mx-auto hover:-translate-y-4 transition-all duration-300 will-change-transform">
           <LoginButton/>    
-                             {/*  TODO(MT): add these to the global pallet*/}
-          <div className="bg-[#6445ff] w-full md:h-24 h-16 rounded-full mx-auto absolute md:-bottom-3 -bottom-2 left-1 -z-10">
+                             
+          <div className="bg-button-secondary w-full md:h-24 h-16 rounded-full mx-auto absolute md:-bottom-3 -bottom-2 left-1 -z-10">
           </div>
         </div>
 
