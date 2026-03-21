@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+
+  --color-primary: var(--color-purple-300);
+  --color-secondary: var(--color-blue-300);
+  --color-accent: #fc9601;
+  --color-background-primary: #11005e;
+  --color-background-secondary: var(--color-slate-950);
+}
