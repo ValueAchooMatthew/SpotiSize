@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-
   --color-primary: var(--color-purple-300);
   --color-secondary: var(--color-blue-300);
   --color-accent: #fc9601;
@@ -9,5 +8,4 @@
   --color-background-secondary: var(--color-slate-950);
   --color-button-primary: #9e8afe;
   --color-button-secondary: #6445ff;
-
 }
