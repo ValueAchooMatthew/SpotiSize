@@ -11,6 +11,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { artistsToNodes, tracksToNodes } from "@/app/_utlis/nodeConverters";
+import LogoutButton from "../logout_button/LogoutButton";
 
 export default function TopArtists({ accessToken }: { accessToken: string }) {
   const [data, setData] = useState<Node[]>();
@@ -139,6 +140,7 @@ export default function TopArtists({ accessToken }: { accessToken: string }) {
                 <div className="border-4 border-black xs:rounded-[5rem] rounded-[3rem] xs:p-4 p-2">
                   <TopItemsVariantPicker topItemsVariant={topItemsVariant} setTopItemsVariant={setTopItemsVariant} setInformation={setInformation} />
                 </div>
+                <LogoutButton/>
               </div>
             </div>
           </div>

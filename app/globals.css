@@ -8,4 +8,10 @@
   --color-background-secondary: var(--color-slate-950);
   --color-button-primary: #9e8afe;
   --color-button-secondary: #6445ff;
+
+  --color-button-good-primary: #26b119;
+  --color-button-good-secondary: #28eea2;
+
+    --color-button-bad-primary: #da0606;
+    --color-button-bad-secondary: #ee6728;
 }
