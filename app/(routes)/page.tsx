@@ -20,7 +20,6 @@ export default function Home() {
             tisize
           </h1>
         </div>
-
       </div>
 
      
@@ -30,9 +29,6 @@ export default function Home() {
 
         <div className="relative w-fit mx-auto hover:-translate-y-4 transition-all duration-300 will-change-transform">
           <LoginButton/>    
-                             
-          <div className="bg-button-secondary w-full md:h-24 h-16 rounded-full mx-auto absolute md:-bottom-3 -bottom-2 left-1 -z-10">
-          </div>
         </div>
 
     </main>
