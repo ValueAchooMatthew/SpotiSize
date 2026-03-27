@@ -5,10 +5,8 @@ import LoginButton from "../_components/login_button/LoginButton";
 export default function Home() {
 
   return (
-    <main className="relative min-h-screen h-full pb-40 overflow-hidden">
+    <main className="w-full h-full pb-40">
       
-      
-
       <div className="mt-32 relative w-fit h-fit mx-auto font-jost">
         <h3 className="absolute text-secondary md:text-6xl medsmal:text-4xl sm:text-2xl text-xl text-center medsmal:top-10 md:top-14 top-16 md:-left-60 medsmal:-left-28 xs:-left-20 -left-16">
           Welcome to
