@@ -3,7 +3,6 @@ import Link from "next/link";
 import DisplayUsername from "../../_components/top_artists/displays/DisplayUsername";
 import DisplayPFP from "../../_components/top_artists/displays/DisplayPFP";
 import { Route } from "next";
-import LogoutButton from "../logout_button/LogoutButton";
 
 export default function Heading({ currentView, alternateViews, viewURLs }:
   { currentView: string, alternateViews: [string, string], viewURLs: [Route, Route] }) {
