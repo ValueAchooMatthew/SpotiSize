@@ -17,12 +17,7 @@ export default async function Profile() {
     });
     return (
       <main className="w-full md:p-8 flex flex-col">
-        <div className="overflow-hidden absolute top-48 -z-20 -left-24 w-84 h-84">
-          <Image className="w-full h-full" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
-        </div>
-        <div className="overflow-hidden absolute -top-48 -z-20 right-12 w-70 h-70">
-          <Image className="w-full h-full" width={1000} height={1000} src={"/img/Noise.svg"} alt="noise svg"></Image>
-        </div>
+        
         <Image className="absolute top-24 right-16 w-96 h-80 hidden xl:inline-block" width={1000} height={1000} src={"/img/spaceman.png"} alt="spaceman"></Image>
 
         <Heading currentView="Galaxy" alternateViews={["My Constellation", "My Globe"]} viewURLs={["/constellation" as Route, "/" as Route]} />

@@ -3,7 +3,7 @@ export default function Contact() {
 
   return (
 
-    <div className="flex flex-col">
+    <main className="flex flex-col">
       <div className="flex justify-center">
         <h1 className="sm:text-7xl text-6xl font-bold text-primary my-20 font-jost">
           Contact Us
@@ -22,7 +22,7 @@ export default function Contact() {
         <Card url="https://avatars.githubusercontent.com/u/64499892" name="Nevin" link={"https://github.com/nevinds"}></Card>
         <Card url="https://avatars.githubusercontent.com/u/86172867" name="Aaryan" link={"https://github.com/patel-aaryan"}></Card>
       </div>
-    </div>
+    </main>
 
   );
 }
