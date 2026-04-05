@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <nav className="top-0 z-10 w-full h-16 bg-transparent">
         <ul className="flex flex-row items-center sm:pr-8 pr-4 font-jost">
-          <li  className="flex " >
+          <li  className="flex" >
             <Link href="/">
               <Image
                 src={"/img/saturn.svg"}
